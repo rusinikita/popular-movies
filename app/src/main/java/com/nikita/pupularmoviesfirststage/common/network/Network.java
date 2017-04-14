@@ -10,7 +10,7 @@ import org.json.JSONObject;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Arrays;
-import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -37,7 +37,7 @@ public final class Network {
   public static final class FetchDataTask<DATA> extends AsyncTask<DataCallback<DATA>, Object, FetchResult<DATA>> {
     private final Uri uri;
     private final Parser<DATA> parser;
-    private List<DataCallback<DATA>> callbacks = Collections.emptyList();
+    private List<DataCallback<DATA>> callbacks = new LinkedList<>();
 
     public FetchDataTask(Uri uri, Parser<DATA> parser) {
       this.uri = uri;

@@ -13,7 +13,7 @@ import java.lang.annotation.RetentionPolicy;
 
 public final class Request {
   private static final String BASE_URL = "https://api.themoviedb.org/3/";
-  private static final String MOVIE = "movie/";
+  private static final String MOVIE = "movie";
   private static final String API_KEY = "api_key";
 
   @Retention(RetentionPolicy.SOURCE)
@@ -31,7 +31,7 @@ public final class Request {
   public static final String NOW_PLAYING = "now_playing";
   public static final String LATEST = "latest";
 
-  public void movieList(@MovieTopic String topic, Network.DataCallback<PageResponse<Movie>> callback) {
+  public static void movieList(@MovieTopic String topic, Network.DataCallback<PageResponse<Movie>> callback) {
     Uri buildUri = Uri.parse(BASE_URL).buildUpon()
       .appendPath(MOVIE)
       .appendPath(topic)

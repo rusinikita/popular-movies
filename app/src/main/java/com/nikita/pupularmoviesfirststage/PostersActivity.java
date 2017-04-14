@@ -5,7 +5,13 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
+
+import com.nikita.pupularmoviesfirststage.common.models.Movie;
+import com.nikita.pupularmoviesfirststage.common.models.PageResponse;
+import com.nikita.pupularmoviesfirststage.common.network.Network;
+import com.nikita.pupularmoviesfirststage.common.network.Request;
 
 public class PostersActivity extends AppCompatActivity {
 
@@ -22,6 +28,13 @@ public class PostersActivity extends AppCompatActivity {
       public void onClick(View view) {
         Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
           .setAction("Action", null).show();
+      }
+    });
+
+    Request.movieList(Request.POPULAR, new Network.DataCallback<PageResponse<Movie>>() {
+      @Override
+      public void onResult(Network.FetchResult<PageResponse<Movie>> result) {
+        Log.d("Posters", result.toString());
       }
     });
   }

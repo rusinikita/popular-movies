@@ -26,7 +26,7 @@ public final class Parser {
         JSONArray genreIds = movie.getJSONArray("genre_ids");
         ArrayList<Integer> genres = new ArrayList<>(genreIds.length());
         for (int j = 0; j < genreIds.length(); j++) {
-          genres.add(genreIds.getInt(i));
+          genres.add(genreIds.getInt(j));
         }
         movies.add(new Movie(
           movie.getString("id"),
