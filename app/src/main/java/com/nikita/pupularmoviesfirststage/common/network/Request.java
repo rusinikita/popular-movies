@@ -5,7 +5,7 @@ import android.net.Uri;
 import android.support.annotation.StringDef;
 
 import com.nikita.pupularmoviesfirststage.BuildConfig;
-import com.nikita.pupularmoviesfirststage.common.models.Movie;
+import com.nikita.pupularmoviesfirststage.common.models.MoviePreview;
 import com.nikita.pupularmoviesfirststage.common.models.PageResponse;
 
 import java.lang.annotation.Retention;
@@ -13,8 +13,18 @@ import java.lang.annotation.RetentionPolicy;
 
 public final class Request {
   private static final String BASE_URL = "https://api.themoviedb.org/3/";
-  private static final String MOVIE = "movie";
   private static final String API_KEY = "api_key";
+
+  @Retention(RetentionPolicy.SOURCE)
+  @StringDef({
+    MOVIE,
+    TV_SHOW,
+    PERSON
+  })
+  public @interface Section {}
+  public static final String MOVIE = "movie";
+  public static final String TV_SHOW = "tv";
+  public static final String PERSON = "person";
 
   @Retention(RetentionPolicy.SOURCE)
   @StringDef({
@@ -31,7 +41,7 @@ public final class Request {
   public static final String NOW_PLAYING = "now_playing";
   public static final String LATEST = "latest";
 
-  public static void movieList(@MovieTopic String topic, Network.DataCallback<PageResponse<Movie>> callback) {
+  public static void movieList(@MovieTopic String topic, Network.DataCallback<PageResponse<MoviePreview>> callback) {
     Uri buildUri = Uri.parse(BASE_URL).buildUpon()
       .appendPath(MOVIE)
       .appendPath(topic)

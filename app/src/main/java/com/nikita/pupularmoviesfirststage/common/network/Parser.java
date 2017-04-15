@@ -1,7 +1,7 @@
 package com.nikita.pupularmoviesfirststage.common.network;
 
 
-import com.nikita.pupularmoviesfirststage.common.models.Movie;
+import com.nikita.pupularmoviesfirststage.common.models.MoviePreview;
 import com.nikita.pupularmoviesfirststage.common.models.PageResponse;
 
 import org.json.JSONArray;
@@ -12,15 +12,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class Parser {
-  public static final class MovieList implements Network.Parser<PageResponse<Movie>> {
+  public static final class MovieList implements Network.Parser<PageResponse<MoviePreview>> {
     @Override
-    public PageResponse<Movie> parse(JSONObject object) throws JSONException {
+    public PageResponse<MoviePreview> parse(JSONObject object) throws JSONException {
       int page = object.getInt("page");
       int pages = object.getInt("total_pages");
       int results = object.getInt("total_results");
 
       JSONArray jsonMovies = object.getJSONArray("results");
-      List<Movie> movies = new ArrayList<>(jsonMovies.length());
+      List<MoviePreview> movies = new ArrayList<>(jsonMovies.length());
       for (int i = 0; i < jsonMovies.length(); i++) {
         JSONObject movie = jsonMovies.getJSONObject(i);
         JSONArray genreIds = movie.getJSONArray("genre_ids");
@@ -28,7 +28,7 @@ public final class Parser {
         for (int j = 0; j < genreIds.length(); j++) {
           genres.add(genreIds.getInt(j));
         }
-        movies.add(new Movie(
+        movies.add(new MoviePreview(
           movie.getString("id"),
           movie.getString("title"),
           movie.getString("poster_path"),

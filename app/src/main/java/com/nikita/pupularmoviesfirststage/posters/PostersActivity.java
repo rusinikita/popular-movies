@@ -9,7 +9,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.nikita.pupularmoviesfirststage.R;
-import com.nikita.pupularmoviesfirststage.common.models.Movie;
+import com.nikita.pupularmoviesfirststage.common.models.MoviePreview;
 import com.nikita.pupularmoviesfirststage.common.models.PageResponse;
 import com.nikita.pupularmoviesfirststage.common.network.Network;
 import com.nikita.pupularmoviesfirststage.common.network.Request;
@@ -32,9 +32,9 @@ public class PostersActivity extends AppCompatActivity {
       }
     });
 
-    Request.movieList(Request.POPULAR, new Network.DataCallback<PageResponse<Movie>>() {
+    Request.movieList(Request.POPULAR, new Network.DataCallback<PageResponse<MoviePreview>>() {
       @Override
-      public void onResult(Network.FetchResult<PageResponse<Movie>> result) {
+      public void onResult(Network.FetchResult<PageResponse<MoviePreview>> result) {
         Log.d("Posters", result.toString());
       }
     });
