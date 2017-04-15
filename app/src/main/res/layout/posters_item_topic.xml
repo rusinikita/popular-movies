@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".posters.PostersActivity"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:padding="16dp"
+    android:gravity="center"
+    android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button"
+    tools:text="Popular"
+    />
