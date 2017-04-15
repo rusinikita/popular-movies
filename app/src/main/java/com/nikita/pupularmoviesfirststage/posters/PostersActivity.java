@@ -4,17 +4,24 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 
 import com.nikita.pupularmoviesfirststage.R;
 import com.nikita.pupularmoviesfirststage.common.models.MoviePreview;
 import com.nikita.pupularmoviesfirststage.common.models.PageResponse;
+import com.nikita.pupularmoviesfirststage.common.models.Poster;
 import com.nikita.pupularmoviesfirststage.common.network.Network;
 import com.nikita.pupularmoviesfirststage.common.network.Request;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PostersActivity extends AppCompatActivity {
+
+  private final PostersAdapter postersAdapter = new PostersAdapter();
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +39,19 @@ public class PostersActivity extends AppCompatActivity {
       }
     });
 
+    RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+    recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+    recyclerView.setAdapter(postersAdapter);
+
     Request.movieList(Request.POPULAR, new Network.DataCallback<PageResponse<MoviePreview>>() {
       @Override
       public void onResult(Network.FetchResult<PageResponse<MoviePreview>> result) {
-        Log.d("Posters", result.toString());
+        if (result.error == null) {
+          postersAdapter.setTopic(Request.POPULAR);
+          List<Poster> posters = new ArrayList<>();
+          posters.addAll(result.data.results);
+          postersAdapter.setPosters(posters);
+        }
       }
     });
   }
