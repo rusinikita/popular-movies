@@ -1,4 +1,4 @@
-package com.nikita.pupularmoviesfirststage;
+package com.nikita.pupularmoviesfirststage.posters;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 
+import com.nikita.pupularmoviesfirststage.R;
 import com.nikita.pupularmoviesfirststage.common.models.Movie;
 import com.nikita.pupularmoviesfirststage.common.models.PageResponse;
 import com.nikita.pupularmoviesfirststage.common.network.Network;
