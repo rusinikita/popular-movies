@@ -100,18 +100,18 @@ public final class PostersAdapter extends RecyclerView.Adapter {
   }
 
   private static final class TopicHolder extends RecyclerView.ViewHolder {
-    public final TextView title;
+    final TextView title;
 
-    public TopicHolder(View itemView) {
+    TopicHolder(View itemView) {
       super(itemView);
       title = (TextView) itemView;
     }
   }
 
   private static final class PosterHolder extends RecyclerView.ViewHolder {
-    public final SimpleDraweeView image;
+    final SimpleDraweeView image;
 
-    public PosterHolder(View itemView) {
+    PosterHolder(View itemView) {
       super(itemView);
       image = (SimpleDraweeView) itemView;
     }
