@@ -1,5 +1,7 @@
 package com.nikita.pupularmoviesfirststage.posters;
 
+import android.content.res.Resources;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager.LayoutParams;
 import android.view.LayoutInflater;
@@ -23,6 +25,7 @@ public final class PostersAdapter extends RecyclerView.Adapter {
   @Request.MovieTopic
   private String movieTopic = "";
   private List<Poster> posters = Collections.emptyList();
+  private int[] placeholderColors;
 
   public void setTopic(@Request.MovieTopic String movieTopic) {
     this.movieTopic = movieTopic;
@@ -36,6 +39,8 @@ public final class PostersAdapter extends RecyclerView.Adapter {
 
   @Override
   public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    initPlaceholdersIfNeed(parent.getResources());
+
     View view = LayoutInflater.from(parent.getContext()).inflate(viewType, parent, false);
     LayoutParams lp = (LayoutParams) view.getLayoutParams();
     float itemsWidth = parent.getWidth() / 2;
@@ -44,7 +49,7 @@ public final class PostersAdapter extends RecyclerView.Adapter {
     switch (viewType) {
       case R.layout.posters_item_topic:
         holder = new TopicHolder(view);
-        lp.height = posterHeight / 2;
+        lp.height = posterHeight / 3;
         break;
       default:
         holder = new PosterHolder(view);
@@ -53,30 +58,23 @@ public final class PostersAdapter extends RecyclerView.Adapter {
     return holder;
   }
 
+  private void initPlaceholdersIfNeed(Resources resources) {
+    if (placeholderColors == null) {
+      placeholderColors = resources.getIntArray(R.array.loading_placeholders_dark);
+    }
+  }
+
   @Override
   public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
     if (holder instanceof TopicHolder) {
       ((TopicHolder) holder).title.setText(movieTopic);
     } else if (holder instanceof PosterHolder) {
       PosterHolder posterHolder = (PosterHolder) holder;
-      int placeholder;
-      switch (position % 4) {
-        case 0:
-          placeholder = android.R.color.black;
-          break;
-        case 1:
-          placeholder = android.R.color.darker_gray;
-          break;
-        case 2:
-          placeholder = android.R.color.holo_blue_dark;
-          break;
-        default:
-          placeholder = android.R.color.holo_red_dark;
-      }
+      int placeholderColor = placeholderColors[position % placeholderColors.length];
       GenericDraweeHierarchyBuilder builder = new GenericDraweeHierarchyBuilder(posterHolder.image.getResources());
       GenericDraweeHierarchy hierarchy = builder
-        .setFadeDuration(300)
-        .setPlaceholderImage(placeholder)
+        .setFadeDuration(200)
+        .setPlaceholderImage(new ColorDrawable(placeholderColor))
         .build();
       posterHolder.image.setHierarchy(hierarchy);
       posterHolder.image.setImageURI(Request.posterImageUrl(posters.get(position - 1).posterPath()));

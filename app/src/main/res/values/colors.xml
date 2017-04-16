@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#081c24</color>
+    <color name="colorPrimaryDark">#04171e</color>
+    <color name="colorAccent">#00d373</color>
+    <color name="windowBackground">#212121</color>
+
+    <array name="loading_placeholders_dark">
+        <item>#ff212121</item>
+        <item>#ff232323</item>
+        <item>#ff191919</item>
+    </array>
+
 </resources>
