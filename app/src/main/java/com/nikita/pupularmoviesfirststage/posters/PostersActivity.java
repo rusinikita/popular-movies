@@ -1,6 +1,7 @@
 package com.nikita.pupularmoviesfirststage.posters;
 
 import android.os.Bundle;
+import android.support.v4.content.pm.ActivityInfoCompat;
 import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
@@ -26,12 +27,15 @@ public class PostersActivity extends AppCompatActivity {
   private ContentLoadingProgressBar loadingView;
   private ErrorView errorView;
 
-  private final PostersAdapter postersAdapter = new PostersAdapter();
+  private int spanCount;
+  private PostersAdapter postersAdapter;
   private String selectedTopic = Request.POPULAR;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    spanCount = getResources().getInteger(R.integer.posters_layout_span_count);
+    postersAdapter = new PostersAdapter(spanCount);
     if (savedInstanceState != null) {
       selectedTopic = savedInstanceState.getString(KEY_SELECTED_TOPIC);
     }
@@ -43,7 +47,7 @@ public class PostersActivity extends AppCompatActivity {
     loadingView = (ContentLoadingProgressBar) findViewById(R.id.progress_bar);
     errorView = (ErrorView) findViewById(R.id.error_view);
     contentView = (RecyclerView) findViewById(R.id.recycler_view);
-    contentView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+    contentView.setLayoutManager(new StaggeredGridLayoutManager(spanCount, StaggeredGridLayoutManager.VERTICAL));
     contentView.setAdapter(postersAdapter);
 
     loadMovies();
@@ -66,10 +70,10 @@ public class PostersActivity extends AppCompatActivity {
           errorView.hideError();
           contentView.setVisibility(View.VISIBLE);
 
-          postersAdapter.setTopic(selectedTopic);
           List<Poster> posters = new ArrayList<>();
           posters.addAll(result.data.results);
           postersAdapter.setPosters(posters);
+          postersAdapter.setTopic(selectedTopic);
         } else {
           contentView.setVisibility(View.GONE);
           errorView.showError(result.error.getMessage(), new Runnable() {
