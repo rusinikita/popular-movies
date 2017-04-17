@@ -15,6 +15,7 @@ import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.nikita.pupularmoviesfirststage.R;
 import com.nikita.pupularmoviesfirststage.common.Constants;
+import com.nikita.pupularmoviesfirststage.common.ResourcesUtils;
 import com.nikita.pupularmoviesfirststage.common.models.Poster;
 import com.nikita.pupularmoviesfirststage.common.network.Request;
 
@@ -90,9 +91,9 @@ public final class PostersAdapter extends RecyclerView.Adapter {
         .setPlaceholderImage(new ColorDrawable(placeholderColor))
         .build();
       posterHolder.image.setHierarchy(hierarchy);
-      posterHolder.image.setImageURI(Request.posterImageUrl(getItem(position).posterPath() + "ff"));
+      posterHolder.image.setImageURI(Request.posterImageUrl(getItem(position).posterPath()));
     } else if (holder instanceof TopicHolder) {
-      ((TopicHolder) holder).title.setText(movieTopic);
+      ((TopicHolder) holder).title.setText(ResourcesUtils.topicTitleRes(movieTopic));
     }
   }
 

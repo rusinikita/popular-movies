@@ -10,6 +10,8 @@ import com.nikita.pupularmoviesfirststage.common.models.PageResponse;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.Arrays;
+import java.util.List;
 
 public final class Request {
   private static final String BASE_URL = "https://api.themoviedb.org/3/";
@@ -32,15 +34,16 @@ public final class Request {
     POPULAR,
     TOP_RATED,
     UPCOMING,
-    NOW_PLAYING,
-    LATEST
+    NOW_PLAYING
   })
   public @interface MovieTopic {}
   public static final String POPULAR = "popular";
   public static final String TOP_RATED = "top_rated";
   public static final String UPCOMING = "upcoming";
   public static final String NOW_PLAYING = "now_playing";
-  public static final String LATEST = "latest";
+  public static List<String> topics() {
+    return Arrays.asList(POPULAR, TOP_RATED, UPCOMING, NOW_PLAYING);
+  }
 
   public static void movieList(@MovieTopic String topic, Network.DataCallback<PageResponse<MoviePreview>> callback) {
     Uri buildUri = Uri.parse(BASE_URL).buildUpon()

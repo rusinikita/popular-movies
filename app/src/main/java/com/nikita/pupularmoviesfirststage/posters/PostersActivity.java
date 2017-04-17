@@ -1,7 +1,10 @@
 package com.nikita.pupularmoviesfirststage.posters;
 
+import android.graphics.Rect;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.pm.ActivityInfoCompat;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
@@ -9,7 +12,15 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.nightonke.boommenu.BoomButtons.ButtonPlaceEnum;
+import com.nightonke.boommenu.BoomButtons.HamButton;
+import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
+import com.nightonke.boommenu.BoomMenuButton;
+import com.nightonke.boommenu.ButtonEnum;
+import com.nightonke.boommenu.Piece.PiecePlaceEnum;
+import com.nightonke.boommenu.Util;
 import com.nikita.pupularmoviesfirststage.R;
+import com.nikita.pupularmoviesfirststage.common.ResourcesUtils;
 import com.nikita.pupularmoviesfirststage.common.models.MoviePreview;
 import com.nikita.pupularmoviesfirststage.common.models.PageResponse;
 import com.nikita.pupularmoviesfirststage.common.models.Poster;
@@ -18,6 +29,7 @@ import com.nikita.pupularmoviesfirststage.common.network.Request;
 import com.nikita.pupularmoviesfirststage.common.views.ErrorView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class PostersActivity extends AppCompatActivity {
@@ -46,11 +58,48 @@ public class PostersActivity extends AppCompatActivity {
 
     loadingView = (ContentLoadingProgressBar) findViewById(R.id.progress_bar);
     errorView = (ErrorView) findViewById(R.id.error_view);
+    initRecyclerView();
+    initMenuButton();
+
+    loadMovies();
+  }
+
+  private void initRecyclerView() {
     contentView = (RecyclerView) findViewById(R.id.recycler_view);
     contentView.setLayoutManager(new StaggeredGridLayoutManager(spanCount, StaggeredGridLayoutManager.VERTICAL));
     contentView.setAdapter(postersAdapter);
+  }
 
-    loadMovies();
+  private void initMenuButton() {
+    BoomMenuButton bmb = (BoomMenuButton) findViewById(R.id.bmb);
+    bmb.setButtonEnum(ButtonEnum.Ham);
+    bmb.setPiecePlaceEnum(PiecePlaceEnum.HAM_4);
+    bmb.setButtonPlaceEnum(ButtonPlaceEnum.HAM_4);
+    int iconPadding = Util.dp2px(16);
+    Rect iconRect = new Rect(iconPadding, iconPadding, iconPadding, iconPadding);
+    List<Integer> buttonColors = ResourcesUtils.getBoomButtonColors(this, 4);
+    for (final String topic : Request.topics()) {
+      HamButton.Builder builder = new HamButton.Builder()
+        .normalImageRes(ResourcesUtils.topicIconRes(topic))
+        .imagePadding(iconRect)
+        .normalTextRes(ResourcesUtils.topicTitleRes(topic))
+        .normalColor(buttonColors.get(0))
+        .buttonWidth(Util.dp2px(200))
+        .listener(new OnBMClickListener() {
+          @Override
+          public void onBoomButtonClick(int index) {
+            if (selectedTopic.equals(topic)) {
+              return;
+            }
+            selectedTopic = topic;
+            contentView.smoothScrollToPosition(0);
+            loadMovies();
+          }
+        });
+      bmb.addBuilder(builder);
+      //next color
+      buttonColors.remove(0);
+    }
   }
 
   @Override

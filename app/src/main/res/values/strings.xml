@@ -2,4 +2,9 @@
     <string name="app_name">Pupular Movies</string>
     <string name="action_settings">Settings</string>
     <string name="action_retry">Retry</string>
+
+    <string name="poster_topic_popular">Popular</string>
+    <string name="poster_topic_top_rated">Top rated</string>
+    <string name="poster_topic_upcoming">Upcoming</string>
+    <string name="poster_topic_now_playing">Now playing</string>
 </resources>
