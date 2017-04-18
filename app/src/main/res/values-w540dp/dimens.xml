@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <integer name="posters_layout_span_count">3</integer>
+
+    <dimen name="movie_detail_content_overlay">32dp</dimen>
+    <dimen name="movie_detail_card_margin">32dp</dimen>
 </resources>
