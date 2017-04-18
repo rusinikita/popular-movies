@@ -23,11 +23,6 @@ public final class Parser {
       List<MoviePreview> movies = new ArrayList<>(jsonMovies.length());
       for (int i = 0; i < jsonMovies.length(); i++) {
         JSONObject movie = jsonMovies.getJSONObject(i);
-        JSONArray genreIds = movie.getJSONArray("genre_ids");
-        ArrayList<Integer> genres = new ArrayList<>(genreIds.length());
-        for (int j = 0; j < genreIds.length(); j++) {
-          genres.add(genreIds.getInt(j));
-        }
         movies.add(new MoviePreview(
           movie.getString("id"),
           movie.getString("title"),
@@ -35,7 +30,6 @@ public final class Parser {
           movie.getString("backdrop_path"),
           movie.getString("overview"),
           movie.getString("release_date"),
-          genres,
           movie.getDouble("popularity"),
           movie.getInt("vote_count"),
           movie.getDouble("vote_average")));

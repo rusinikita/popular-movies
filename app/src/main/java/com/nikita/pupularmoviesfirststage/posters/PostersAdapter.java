@@ -24,6 +24,8 @@ import java.util.List;
 
 public final class PostersAdapter extends RecyclerView.Adapter {
 
+  public PosterClickAction posterClickAction;
+
   @Request.MovieTopic
   private String movieTopic = "";
   private List<Poster> posters = Collections.emptyList();
@@ -61,7 +63,7 @@ public final class PostersAdapter extends RecyclerView.Adapter {
     LayoutParams lp = (LayoutParams) view.getLayoutParams();
     float itemsWidth = parent.getWidth() / spanCount;
     int posterHeight = Math.round(itemsWidth * Constants.POSTER_ASPECT_RATIO);
-    RecyclerView.ViewHolder holder;
+    final RecyclerView.ViewHolder holder;
     switch (viewType) {
       case R.layout.posters_item_topic:
         holder = new TopicHolder(view);
@@ -69,6 +71,14 @@ public final class PostersAdapter extends RecyclerView.Adapter {
         break;
       default:
         holder = new PosterHolder(view);
+        view.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+            if (posterClickAction != null) {
+              posterClickAction.onPosterClick(getItem(holder.getAdapterPosition()));
+            }
+          }
+        });
         lp.height = posterHeight;
     }
     return holder;
@@ -129,5 +139,9 @@ public final class PostersAdapter extends RecyclerView.Adapter {
       super(itemView);
       image = (SimpleDraweeView) itemView;
     }
+  }
+
+  public interface PosterClickAction {
+    void onPosterClick(Poster poster);
   }
 }

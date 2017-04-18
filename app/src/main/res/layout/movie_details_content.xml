@@ -15,6 +15,8 @@
         android:layout_marginRight="@dimen/movie_detail_card_margin"
         android:layout_marginStart="@dimen/movie_detail_card_margin"
         android:layout_marginTop="8dp"
+        app:cardPreventCornerOverlap="false"
+        app:cardUseCompatPadding="false"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -30,6 +32,9 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:roundedCornerRadius="2dp"
+                app:roundTopLeft="true"
+                app:roundBottomLeft="false"
                 app:placeholderImage="@color/colorPrimaryDark"/>
 
             <TextView
@@ -40,7 +45,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:text="@string/movie_detail_rating"
                 android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                 app:layout_constraintLeft_toRightOf="@+id/poster"
@@ -116,16 +121,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="16dp"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
                 android:text="@string/movie_detail_release_date"
                 android:textAppearance="@style/TextAppearance.AppCompat.Caption"/>
 
@@ -133,12 +134,7 @@
                 android:id="@+id/overview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed felis eros, lobortis in nisl et, bibendum sodales eros. Aenean eleifend erat sed magna posuere dictum. Phasellus et augue ut nisi viverra consequat."/>
 

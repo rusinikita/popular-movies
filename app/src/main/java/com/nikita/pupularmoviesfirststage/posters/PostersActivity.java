@@ -2,9 +2,6 @@ package com.nikita.pupularmoviesfirststage.posters;
 
 import android.graphics.Rect;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.pm.ActivityInfoCompat;
-import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
@@ -27,9 +24,9 @@ import com.nikita.pupularmoviesfirststage.common.models.Poster;
 import com.nikita.pupularmoviesfirststage.common.network.Network;
 import com.nikita.pupularmoviesfirststage.common.network.Request;
 import com.nikita.pupularmoviesfirststage.common.views.ErrorView;
+import com.nikita.pupularmoviesfirststage.movies.MovieDetailsActivity;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class PostersActivity extends AppCompatActivity {
@@ -60,6 +57,17 @@ public class PostersActivity extends AppCompatActivity {
     errorView = (ErrorView) findViewById(R.id.error_view);
     initRecyclerView();
     initMenuButton();
+
+    postersAdapter.posterClickAction = new PostersAdapter.PosterClickAction() {
+      @Override
+      public void onPosterClick(Poster poster) {
+        if (poster instanceof MoviePreview) {
+          startActivity(MovieDetailsActivity.getIntent(PostersActivity.this, (MoviePreview) poster));
+        } else {
+          throw new IllegalArgumentException();
+        }
+      }
+    };
 
     loadMovies();
   }
