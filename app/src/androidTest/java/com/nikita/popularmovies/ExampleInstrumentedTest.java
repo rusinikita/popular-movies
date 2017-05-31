@@ -1,4 +1,4 @@
-package com.nikita.pupularmovies;
+package com.nikita.popularmovies;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static junit.framework.Assert.assertEquals;
-import static org.junit.Assert.*;
 
 /**
  * Instrumentation test, which will execute on an Android device.

@@ -1,4 +1,4 @@
-package com.nikita.pupularmovies.common.models;
+package com.nikita.popularmovies.common.models;
 
 
 import java.util.List;

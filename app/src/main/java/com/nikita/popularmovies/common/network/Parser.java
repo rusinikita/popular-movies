@@ -1,8 +1,8 @@
-package com.nikita.pupularmovies.common.network;
+package com.nikita.popularmovies.common.network;
 
 
-import com.nikita.pupularmovies.common.models.MoviePreview;
-import com.nikita.pupularmovies.common.models.PageResponse;
+import com.nikita.popularmovies.common.models.MoviePreview;
+import com.nikita.popularmovies.common.models.PageResponse;
 
 import org.json.JSONArray;
 import org.json.JSONException;

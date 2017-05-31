@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:parentTag="android.support.design.widget.CoordinatorLayout"
-    tools:context="com.nikita.pupularmovies.posters.PostersActivity"
+    tools:context="com.nikita.popularmovies.posters.PostersActivity"
     tools:showIn="@layout/posters_activity">
 
     <android.support.v7.widget.RecyclerView
@@ -23,7 +23,7 @@
         android:layout_gravity="center"
         />
 
-    <com.nikita.pupularmovies.common.views.ErrorView
+    <com.nikita.popularmovies.common.views.ErrorView
         android:id="@+id/error_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

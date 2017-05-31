@@ -1,10 +1,10 @@
-package com.nikita.pupularmovies.common.models;
+package com.nikita.popularmovies.common.models;
 
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.nikita.pupularmovies.common.network.Request;
+import com.nikita.popularmovies.common.network.Request;
 
 public final class MoviePreview implements Poster, Parcelable {
   public final String id;

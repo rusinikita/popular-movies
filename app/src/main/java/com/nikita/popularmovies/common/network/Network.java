@@ -1,4 +1,4 @@
-package com.nikita.pupularmovies.common.network;
+package com.nikita.popularmovies.common.network;
 
 import android.accounts.NetworkErrorException;
 import android.net.Uri;

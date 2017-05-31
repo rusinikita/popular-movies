@@ -1,4 +1,4 @@
-package com.nikita.pupularmovies;
+package com.nikita.popularmovies;
 
 import android.app.Application;
 

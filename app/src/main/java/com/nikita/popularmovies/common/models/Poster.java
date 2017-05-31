@@ -1,6 +1,6 @@
-package com.nikita.pupularmovies.common.models;
+package com.nikita.popularmovies.common.models;
 
-import com.nikita.pupularmovies.common.network.Request;
+import com.nikita.popularmovies.common.network.Request;
 
 public interface Poster {
   String id();

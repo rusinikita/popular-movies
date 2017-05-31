@@ -1,4 +1,4 @@
-package com.nikita.pupularmovies.common.views;
+package com.nikita.popularmovies.common.views;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.nikita.pupularmovies.R;
+import com.nikita.popularmovies.R;
 
 public final class ErrorView extends LinearLayout {
   private final TextView errorTitle;

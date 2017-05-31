@@ -1,4 +1,4 @@
-package com.nikita.pupularmovies;
+package com.nikita.popularmovies;
 
 import org.junit.Test;
 

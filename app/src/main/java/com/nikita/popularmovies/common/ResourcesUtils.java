@@ -1,11 +1,11 @@
-package com.nikita.pupularmovies.common;
+package com.nikita.popularmovies.common;
 
 import android.content.Context;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
 
-import com.nikita.pupularmovies.R;
-import com.nikita.pupularmovies.common.network.Request;
+import com.nikita.popularmovies.R;
+import com.nikita.popularmovies.common.network.Request;
 
 import java.util.LinkedList;
 import java.util.List;
