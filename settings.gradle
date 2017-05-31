@@ -1,1 +1,1 @@
-include ':app', ':persistent_storage'
+include ':app', ':persistent-storage'
