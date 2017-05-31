@@ -4,7 +4,7 @@ package com.nikita.popularmovies.common.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.nikita.popularmovies.common.network.Request;
+import static com.nikita.popularmovies.common.models.SectionKt.MOVIE;
 
 public final class MoviePreview implements Poster, Parcelable {
   public final String id;
@@ -76,7 +76,9 @@ public final class MoviePreview implements Poster, Parcelable {
 
   @Override
   public String section() {
-    return Request.MOVIE;
+    //Example java lint problems with StringDef, IntDef
+    //noinspection WrongConstant
+    return MOVIE;
   }
 
   @Override

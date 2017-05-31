@@ -13,21 +13,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.nikita.popularmovies.common.models.SectionKt.MOVIE;
+
 public final class Request {
   private static final String BASE_URL = "https://api.themoviedb.org/3/";
   private static final String API_KEY = "api_key";
   public static final String IMAGE_BASE_URL = "https://image.tmdb.org/t/p";
-
-  @Retention(RetentionPolicy.SOURCE)
-  @StringDef({
-    MOVIE,
-    TV_SHOW,
-    PERSON
-  })
-  public @interface Section {}
-  public static final String MOVIE = "movie";
-  public static final String TV_SHOW = "tv";
-  public static final String PERSON = "person";
 
   @Retention(RetentionPolicy.SOURCE)
   @StringDef({
