@@ -1,12 +1,12 @@
-package com.nikita.pupularmoviesfirststage.common.network;
+package com.nikita.pupularmovies.common.network;
 
 
 import android.net.Uri;
 import android.support.annotation.StringDef;
 
-import com.nikita.pupularmoviesfirststage.BuildConfig;
-import com.nikita.pupularmoviesfirststage.common.models.MoviePreview;
-import com.nikita.pupularmoviesfirststage.common.models.PageResponse;
+import com.nikita.pupularmovies.BuildConfig;
+import com.nikita.pupularmovies.common.models.MoviePreview;
+import com.nikita.pupularmovies.common.models.PageResponse;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

@@ -1,14 +1,10 @@
-package com.nikita.pupularmoviesfirststage.common.models;
+package com.nikita.pupularmovies.common.models;
 
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.nikita.pupularmoviesfirststage.common.network.Request;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import com.nikita.pupularmovies.common.network.Request;
 
 public final class MoviePreview implements Poster, Parcelable {
   public final String id;

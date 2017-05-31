@@ -1,4 +1,4 @@
-package com.nikita.pupularmoviesfirststage.posters;
+package com.nikita.pupularmovies.posters;
 
 import android.graphics.Rect;
 import android.os.Bundle;
@@ -16,15 +16,15 @@ import com.nightonke.boommenu.BoomMenuButton;
 import com.nightonke.boommenu.ButtonEnum;
 import com.nightonke.boommenu.Piece.PiecePlaceEnum;
 import com.nightonke.boommenu.Util;
-import com.nikita.pupularmoviesfirststage.R;
-import com.nikita.pupularmoviesfirststage.common.ResourcesUtils;
-import com.nikita.pupularmoviesfirststage.common.models.MoviePreview;
-import com.nikita.pupularmoviesfirststage.common.models.PageResponse;
-import com.nikita.pupularmoviesfirststage.common.models.Poster;
-import com.nikita.pupularmoviesfirststage.common.network.Network;
-import com.nikita.pupularmoviesfirststage.common.network.Request;
-import com.nikita.pupularmoviesfirststage.common.views.ErrorView;
-import com.nikita.pupularmoviesfirststage.movies.MovieDetailsActivity;
+import com.nikita.pupularmovies.R;
+import com.nikita.pupularmovies.common.ResourcesUtils;
+import com.nikita.pupularmovies.common.models.MoviePreview;
+import com.nikita.pupularmovies.common.models.PageResponse;
+import com.nikita.pupularmovies.common.models.Poster;
+import com.nikita.pupularmovies.common.network.Network;
+import com.nikita.pupularmovies.common.network.Request;
+import com.nikita.pupularmovies.common.views.ErrorView;
+import com.nikita.pupularmovies.movies.MovieDetailsActivity;
 
 import java.util.ArrayList;
 import java.util.List;

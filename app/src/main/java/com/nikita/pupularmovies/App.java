@@ -1,4 +1,4 @@
-package com.nikita.pupularmoviesfirststage;
+package com.nikita.pupularmovies;
 
 import android.app.Application;
 

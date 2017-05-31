@@ -1,4 +1,4 @@
-package com.nikita.pupularmoviesfirststage.posters;
+package com.nikita.pupularmovies.posters;
 
 import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
@@ -13,11 +13,11 @@ import android.widget.TextView;
 import com.facebook.drawee.generic.GenericDraweeHierarchy;
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.nikita.pupularmoviesfirststage.R;
-import com.nikita.pupularmoviesfirststage.common.Constants;
-import com.nikita.pupularmoviesfirststage.common.ResourcesUtils;
-import com.nikita.pupularmoviesfirststage.common.models.Poster;
-import com.nikita.pupularmoviesfirststage.common.network.Request;
+import com.nikita.pupularmovies.R;
+import com.nikita.pupularmovies.common.Constants;
+import com.nikita.pupularmovies.common.ResourcesUtils;
+import com.nikita.pupularmovies.common.models.Poster;
+import com.nikita.pupularmovies.common.network.Request;
 
 import java.util.Collections;
 import java.util.List;

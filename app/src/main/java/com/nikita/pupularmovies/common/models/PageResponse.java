@@ -1,4 +1,4 @@
-package com.nikita.pupularmoviesfirststage.common.models;
+package com.nikita.pupularmovies.common.models;
 
 
 import java.util.List;

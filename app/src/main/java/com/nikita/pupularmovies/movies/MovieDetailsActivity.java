@@ -1,4 +1,4 @@
-package com.nikita.pupularmoviesfirststage.movies;
+package com.nikita.pupularmovies.movies;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,9 +9,9 @@ import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.nikita.pupularmoviesfirststage.R;
-import com.nikita.pupularmoviesfirststage.common.models.MoviePreview;
-import com.nikita.pupularmoviesfirststage.common.network.Request;
+import com.nikita.pupularmovies.R;
+import com.nikita.pupularmovies.common.models.MoviePreview;
+import com.nikita.pupularmovies.common.network.Request;
 
 public final class MovieDetailsActivity extends AppCompatActivity {
   private static final String EXTRA_MOVIE = "movie";

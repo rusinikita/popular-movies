@@ -1,4 +1,4 @@
-package com.nikita.pupularmoviesfirststage.common.network;
+package com.nikita.pupularmovies.common.network;
 
 import android.accounts.NetworkErrorException;
 import android.net.Uri;
