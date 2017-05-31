@@ -17,7 +17,6 @@ public final class MoviePreview implements Poster, Parcelable {
   public final int voteCount;
   public final double voteAverage;
 
-
   public MoviePreview(String id,
                       String title,
                       String posterPath,
