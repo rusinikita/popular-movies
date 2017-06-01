@@ -6,7 +6,6 @@ import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.nightonke.boommenu.BoomButtons.ButtonPlaceEnum;
@@ -50,8 +49,6 @@ public class PostersActivity extends AppCompatActivity {
     }
 
     setContentView(R.layout.posters_activity);
-    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-    setSupportActionBar(toolbar);
 
     loadingView = (ContentLoadingProgressBar) findViewById(R.id.progress_bar);
     errorView = (ErrorView) findViewById(R.id.error_view);
