@@ -1,1 +1,1 @@
-include ':app', ':persistent-storage'
+include ':app', ':movies_repository'
