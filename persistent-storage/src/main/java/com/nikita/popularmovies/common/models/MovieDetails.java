@@ -1,30 +1,31 @@
 package com.nikita.popularmovies.common.models;
 
 import android.arch.persistence.room.Embedded;
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.Relation;
 
 import java.util.Collections;
 import java.util.List;
 
-@Entity
 public final class MovieDetails {
-  @PrimaryKey
-  private final String id;
   @Embedded
-  private final MoviePreview moviePreview;
-  private final List<Video> videos;
-  private final List<Review> reviews;
+  public MoviePreview moviePreview;
+  @Relation(parentColumn = "id", entityColumn = "movie_id")
+  public List<Video> videos;
+  @Relation(parentColumn = "id", entityColumn = "movie_id")
+  public List<Review> reviews;
 
+  public MovieDetails() {}
+
+  @Ignore
   public MovieDetails(MoviePreview moviePreview) {
-    this.id = moviePreview.id;
     this.moviePreview = moviePreview;
     videos = Collections.emptyList();
     reviews = Collections.emptyList();
   }
 
+  @Ignore
   public MovieDetails(MoviePreview moviePreview, List<Video> videos, List<Review> reviews) {
-    this.id = moviePreview.id;
     this.moviePreview = moviePreview;
     this.videos = videos;
     this.reviews = reviews;
