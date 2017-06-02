@@ -1,1 +1,1 @@
-include ':app', ':movies_repository'
+include ':app', ':movies_repository', ':details'
