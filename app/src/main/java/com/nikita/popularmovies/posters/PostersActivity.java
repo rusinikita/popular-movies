@@ -125,7 +125,7 @@ public class PostersActivity extends AppCompatActivity {
           contentView.setVisibility(View.VISIBLE);
 
           List<Poster> posters = new ArrayList<>();
-          posters.addAll(result.data.results);
+          posters.addAll(result.data.getResults());
           postersAdapter.setPosters(posters);
           postersAdapter.setTopic(selectedTopic);
         } else {
