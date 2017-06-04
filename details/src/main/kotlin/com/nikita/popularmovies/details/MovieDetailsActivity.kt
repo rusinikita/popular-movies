@@ -1,6 +1,8 @@
 package com.nikita.popularmovies.details
 
 import android.arch.lifecycle.LifecycleActivity
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -30,6 +32,17 @@ class MovieDetailsActivity : LifecycleActivity() {
     releaseDate.text = movie.releaseDate
     val overview = findViewById(R.id.overview) as TextView
     overview.text = movie.overview
+
+    subscribeViewModel()
+  }
+
+  private fun subscribeViewModel() {
+    val viewModel = ViewModelProviders.of(this).get(MovieDetailsViewModel::class.java)
+    viewModel.movieDetailsLiveData.observe(this, Observer { data -> data?.let { render(it) } })
+  }
+
+  private fun render(model: MovieDetailsScreen) {
+
   }
 
   companion object {
