@@ -7,7 +7,4 @@
     <string name="poster_topic_top_rated">Top rated</string>
     <string name="poster_topic_upcoming">Upcoming</string>
     <string name="poster_topic_now_playing">Now playing</string>
-    
-    <string name="movie_detail_rating">Rating</string>
-    <string name="movie_detail_release_date">Release date</string>
 </resources>

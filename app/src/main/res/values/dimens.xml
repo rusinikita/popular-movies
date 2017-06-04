@@ -1,8 +1,6 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="expanded_app_bar_height">180dp</dimen>
-    <dimen name="movie_detail_content_overlay">0dp</dimen>
-    <dimen name="movie_detail_card_margin">0dp</dimen>
 
     <integer name="posters_layout_span_count">2</integer>
 </resources>

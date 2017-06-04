@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">Details</string>
+    <string name="movie_detail_rating">Rating</string>
+    <string name="movie_detail_release_date">Release date</string>
 </resources>

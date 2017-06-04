@@ -10,6 +10,7 @@
 
         <item name="android:actionBarStyle">@style/AppTheme.AppBarOverlay</item>
         <item name="android:popupWindowStyle">@style/AppTheme.PopupOverlay</item>
+        <item name="actionBarStyle">@style/AppTheme.AppBarOverlay</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>

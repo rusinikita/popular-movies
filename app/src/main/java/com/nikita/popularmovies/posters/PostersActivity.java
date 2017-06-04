@@ -23,7 +23,7 @@ import com.nikita.popularmovies.common.models.Poster;
 import com.nikita.popularmovies.common.network.Network;
 import com.nikita.popularmovies.common.network.Request;
 import com.nikita.popularmovies.common.views.ErrorView;
-import com.nikita.popularmovies.movies.MovieDetailsActivity;
+import com.nikita.popularmovies.details.MovieDetailsActivity;
 
 import java.util.ArrayList;
 import java.util.List;

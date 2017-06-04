@@ -29,3 +29,6 @@ private fun <T> extractError(response: Response<T>): Exception {
 }
 
 class ApiError(message: String, causeException: Throwable? = null) : RuntimeException(message, causeException)
+
+const val IMAGE_BASE_URL = "https://image.tmdb.org/t/p"
+val String.posterPathUrl: String get() = "$IMAGE_BASE_URL/w500$this"

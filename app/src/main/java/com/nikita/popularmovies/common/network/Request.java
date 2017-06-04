@@ -18,7 +18,6 @@ import static com.nikita.popularmovies.common.models.SectionKt.MOVIE;
 public final class Request {
   private static final String BASE_URL = "https://api.themoviedb.org/3/";
   private static final String API_KEY = "api_key";
-  public static final String IMAGE_BASE_URL = "https://image.tmdb.org/t/p";
 
   @Retention(RetentionPolicy.SOURCE)
   @StringDef({
@@ -44,9 +43,5 @@ public final class Request {
       .build();
 
     new Network.FetchDataTask<>(buildUri, new Parser.MovieList()).execute(callback);
-  }
-
-  public static String posterImageUrl(String posterPath) {
-    return IMAGE_BASE_URL + "/w500" + posterPath;
   }
 }
