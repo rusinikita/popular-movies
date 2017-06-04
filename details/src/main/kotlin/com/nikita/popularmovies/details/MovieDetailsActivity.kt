@@ -1,16 +1,16 @@
 package com.nikita.popularmovies.details
 
+import android.arch.lifecycle.LifecycleActivity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.widget.TextView
 import com.facebook.drawee.view.SimpleDraweeView
 import com.nikita.popularmovies.common.models.MoviePreview
 import com.nikita.popularmovies.common.network.posterPathUrl
 
-class MovieDetailsActivity : AppCompatActivity() {
+class MovieDetailsActivity : LifecycleActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -18,8 +18,7 @@ class MovieDetailsActivity : AppCompatActivity() {
     val movie = intent.getParcelableExtra<MoviePreview>(EXTRA_MOVIE)
 
     val toolbar = findViewById(R.id.toolbar) as Toolbar
-    setSupportActionBar(toolbar)
-    supportActionBar!!.title = movie.title
+    toolbar.title = movie.title
 
     val backdrop = findViewById(R.id.backdrop) as SimpleDraweeView
     backdrop.setImageURI(movie.backdropPath.posterPathUrl)
