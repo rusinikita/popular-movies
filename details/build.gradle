@@ -20,10 +20,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
+}
+
+kapt {
+    // need for usage generated classes in code
+    generateStubs = true
 }
 
 dependencies {

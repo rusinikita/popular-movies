@@ -9,40 +9,52 @@ import android.os.Bundle
 import android.support.v7.widget.Toolbar
 import android.widget.TextView
 import com.facebook.drawee.view.SimpleDraweeView
+import com.nikita.popularmovies.common.findView
 import com.nikita.popularmovies.common.models.MoviePreview
 import com.nikita.popularmovies.common.network.posterPathUrl
 
 class MovieDetailsActivity : LifecycleActivity() {
+  private lateinit var toolbar: Toolbar
+  private lateinit var backdrop: SimpleDraweeView
+  private lateinit var poster: SimpleDraweeView
+  private lateinit var rating: TextView
+  private lateinit var releaseDate: TextView
+  private lateinit var overview: TextView
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.movie_details_activity)
-    val movie = intent.getParcelableExtra<MoviePreview>(EXTRA_MOVIE)
-
-    val toolbar = findViewById(R.id.toolbar) as Toolbar
-    toolbar.title = movie.title
-
-    val backdrop = findViewById(R.id.backdrop) as SimpleDraweeView
-    backdrop.setImageURI(movie.backdropPath.posterPathUrl)
-    val poster = findViewById(R.id.poster) as SimpleDraweeView
-    poster.setImageURI(movie.posterPath.posterPathUrl)
-    val rating = findViewById(R.id.rating) as TextView
-    rating.text = movie.voteAverage.toString()
-    val releaseDate = findViewById(R.id.date) as TextView
-    releaseDate.text = movie.releaseDate
-    val overview = findViewById(R.id.overview) as TextView
-    overview.text = movie.overview
-
-    subscribeViewModel()
+    initViews()
+    subscribeViewModel(savedInstanceState)
   }
 
-  private fun subscribeViewModel() {
+  private fun initViews() {
+    toolbar = findView(R.id.toolbar)
+    backdrop = findView(R.id.backdrop)
+    poster = findView(R.id.poster)
+    rating = findView(R.id.rating)
+    releaseDate = findView(R.id.date)
+    overview = findView(R.id.overview)
+  }
+
+  private fun subscribeViewModel(savedInstanceState: Bundle?) {
     val viewModel = ViewModelProviders.of(this).get(MovieDetailsViewModel::class.java)
     viewModel.movieDetailsLiveData.observe(this, Observer { data -> data?.let { render(it) } })
+    if (savedInstanceState == null) {
+      val movie = intent.getParcelableExtra<MoviePreview>(EXTRA_MOVIE)
+      viewModel.onInitialData(movie)
+    }
   }
 
   private fun render(model: MovieDetailsScreen) {
+    val moviePreview = model.content.moviePreview
 
+    toolbar.title = moviePreview.title
+    backdrop.setImageURI(moviePreview.backdropPath.posterPathUrl)
+    poster.setImageURI(moviePreview.posterPath.posterPathUrl)
+    rating.text = moviePreview.voteAverage.toString()
+    releaseDate.text = moviePreview.releaseDate
+    overview.text = moviePreview.overview
   }
 
   companion object {
