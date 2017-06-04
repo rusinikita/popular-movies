@@ -38,12 +38,9 @@ class MovieDetailsActivity : LifecycleActivity() {
   }
 
   private fun subscribeViewModel(savedInstanceState: Bundle?) {
-    val viewModel = ViewModelProviders.of(this).get(MovieDetailsViewModel::class.java)
+    val movie = intent.getParcelableExtra<MoviePreview>(EXTRA_MOVIE)
+    val viewModel = ViewModelProviders.of(this, MovieDetailsViewModelFactory(this, movie)).get(MovieDetailsViewModel::class.java)
     viewModel.movieDetailsLiveData.observe(this, Observer { data -> data?.let { render(it) } })
-    if (savedInstanceState == null) {
-      val movie = intent.getParcelableExtra<MoviePreview>(EXTRA_MOVIE)
-      viewModel.onInitialData(movie)
-    }
   }
 
   private fun render(model: MovieDetailsScreen) {

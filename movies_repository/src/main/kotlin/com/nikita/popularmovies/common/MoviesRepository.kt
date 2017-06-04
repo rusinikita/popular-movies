@@ -42,12 +42,12 @@ class MovieRepositoryImpl(private val moviesDao: MovieDao,
   }
 }
 
-fun createMovieRepository(context: Application, baseUrl: String): MovieRepository {
+fun createMovieRepository(context: Application): MovieRepository {
   val db = Room.databaseBuilder(context, Database::class.java, "database")
     .build()
     .movieDao()
   val api = Retrofit.Builder()
-    .baseUrl(baseUrl)
+    .baseUrl("https://api.themoviedb.org/3/")
     .addConverterFactory(MoshiConverterFactory.create())
     .build()
     .create(MoviesApi::class.java)
