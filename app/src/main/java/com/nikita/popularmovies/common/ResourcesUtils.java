@@ -15,6 +15,8 @@ public final class ResourcesUtils {
   @StringRes
   public static int topicTitleRes(@Request.MovieTopic String topic) {
     switch (topic) {
+      case Request.SAVED:
+        return R.string.poster_topic_saved;
       case Request.POPULAR:
         return R.string.poster_topic_popular;
       case Request.TOP_RATED:
@@ -31,6 +33,8 @@ public final class ResourcesUtils {
   @DrawableRes
   public static int topicIconRes(@Request.MovieTopic String topic) {
     switch (topic) {
+      case Request.SAVED:
+        return android.R.drawable.btn_star;
       case Request.POPULAR:
         return R.drawable.ic_heart;
       case Request.TOP_RATED:

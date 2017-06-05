@@ -21,18 +21,20 @@ public final class Request {
 
   @Retention(RetentionPolicy.SOURCE)
   @StringDef({
+    SAVED,
     POPULAR,
     TOP_RATED,
     UPCOMING,
     NOW_PLAYING
   })
   public @interface MovieTopic {}
+  public static final String SAVED = "saved";
   public static final String POPULAR = "popular";
   public static final String TOP_RATED = "top_rated";
   public static final String UPCOMING = "upcoming";
   public static final String NOW_PLAYING = "now_playing";
   public static List<String> topics() {
-    return Arrays.asList(POPULAR, TOP_RATED, UPCOMING, NOW_PLAYING);
+    return Arrays.asList(SAVED, POPULAR, TOP_RATED, UPCOMING, NOW_PLAYING);
   }
 
   public static void movieList(@MovieTopic String topic, Network.DataCallback<PageResponse<MoviePreview>> callback) {

@@ -54,6 +54,7 @@ class MovieDetailsViewModel(initialMoviePreview: MoviePreview,
     launch(UI) {
       async(CommonPool) {
         movieDetailsLiveData.value?.let {
+          // TODO fix second click crash
           print(it)
           moviesRepository.saveMovie(it.content)
         }

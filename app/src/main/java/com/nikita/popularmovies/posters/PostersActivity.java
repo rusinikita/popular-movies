@@ -16,6 +16,7 @@ import com.nightonke.boommenu.ButtonEnum;
 import com.nightonke.boommenu.Piece.PiecePlaceEnum;
 import com.nightonke.boommenu.Util;
 import com.nikita.popularmovies.R;
+import com.nikita.popularmovies.common.GetSavedMoviesTask;
 import com.nikita.popularmovies.common.ResourcesUtils;
 import com.nikita.popularmovies.common.models.MoviePreview;
 import com.nikita.popularmovies.common.models.PageResponse;
@@ -78,11 +79,11 @@ public class PostersActivity extends AppCompatActivity {
   private void initMenuButton() {
     BoomMenuButton bmb = (BoomMenuButton) findViewById(R.id.bmb);
     bmb.setButtonEnum(ButtonEnum.Ham);
-    bmb.setPiecePlaceEnum(PiecePlaceEnum.HAM_4);
-    bmb.setButtonPlaceEnum(ButtonPlaceEnum.HAM_4);
+    bmb.setPiecePlaceEnum(PiecePlaceEnum.HAM_5);
+    bmb.setButtonPlaceEnum(ButtonPlaceEnum.HAM_5);
     int iconPadding = Util.dp2px(16);
     Rect iconRect = new Rect(iconPadding, iconPadding, iconPadding, iconPadding);
-    List<Integer> buttonColors = ResourcesUtils.getBoomButtonColors(this, 4);
+    List<Integer> buttonColors = ResourcesUtils.getBoomButtonColors(this, Request.topics().size());
     for (final String topic : Request.topics()) {
       HamButton.Builder builder = new HamButton.Builder()
         .normalImageRes(ResourcesUtils.topicIconRes(topic))
@@ -114,6 +115,42 @@ public class PostersActivity extends AppCompatActivity {
   }
 
   private void loadMovies() {
+    if (selectedTopic.equals(Request.SAVED)) {
+      loadSaved();
+    } else {
+      loadFromNetwork();
+    }
+  }
+
+  private void loadSaved() {
+    errorView.hideError();
+    loadingView.show();
+    new GetSavedMoviesTask(this).execute(new Network.DataCallback<List<MoviePreview>>() {
+      @Override
+      public void onResult(Network.FetchResult<List<MoviePreview>> result) {
+        loadingView.hide();
+        if (result.error == null) {
+          errorView.hideError();
+          contentView.setVisibility(View.VISIBLE);
+
+          List<Poster> posters = new ArrayList<>();
+          posters.addAll(result.data);
+          postersAdapter.setPosters(posters);
+          postersAdapter.setTopic(selectedTopic);
+        } else {
+          contentView.setVisibility(View.GONE);
+          errorView.showError(result.error.getMessage(), new Runnable() {
+            @Override
+            public void run() {
+              loadMovies();
+            }
+          });
+        }
+      }
+    });
+  }
+
+  private void loadFromNetwork() {
     errorView.hideError();
     loadingView.show();
     Request.movieList(selectedTopic, new Network.DataCallback<PageResponse<MoviePreview>>() {
