@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:cardCornerRadius="6dp"
+    app:cardElevation="16dp"
+    app:cardPreventCornerOverlap="false"
+    app:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/author"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:gravity="end"
+            tools:text="Lorem Ipsum"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            />
+        <TextView
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:ellipsize="end"
+            tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sapien tortor, condimentum in justo id, iaculis egestas diam. In ornare enim sit amet velit sollicitudin blandit. Donec sagittis felis quis mauris convallis malesuada. Nullam bibendum bibendum diam, eget dignissim ante imperdiet eu. Suspendisse vel augue id nunc pellentesque vehicula. Donec ut sem eros. Mauris convallis eros vitae risus maximus scelerisque. Suspendisse et posuere augue, elementum molestie justo. Aenean lorem erat, laoreet et luctus at, dignissim vel quam."
+            />
+    </LinearLayout>
+</android.support.v7.widget.CardView>

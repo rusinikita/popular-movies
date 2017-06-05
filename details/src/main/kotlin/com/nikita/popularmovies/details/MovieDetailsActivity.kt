@@ -22,6 +22,7 @@ class MovieDetailsActivity : LifecycleActivity() {
   private lateinit var releaseDate: TextView
   private lateinit var overview: TextView
   private val videosAdapter = VideosAdapter(videoClickAction = { TODO()})
+  private val reviewsAdapter = ReviewsAdapter()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -39,6 +40,8 @@ class MovieDetailsActivity : LifecycleActivity() {
     overview = findView(R.id.overview)
     val videosPager: HorizontalInfiniteCycleViewPager = findView(R.id.videos)
     videosPager.adapter = videosAdapter
+    val reviewsPager: HorizontalInfiniteCycleViewPager = findView(R.id.reviews)
+    reviewsPager.adapter = reviewsAdapter
   }
 
   private fun subscribeViewModel(savedInstanceState: Bundle?) {
@@ -58,6 +61,7 @@ class MovieDetailsActivity : LifecycleActivity() {
     overview.text = moviePreview.overview
 
     videosAdapter.changeData(moviePreview.backdropPath, model.content.videos)
+    reviewsAdapter.changeData(model.content.reviews)
   }
 
   companion object {

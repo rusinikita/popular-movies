@@ -20,5 +20,4 @@ data class Video(@field:PrimaryKey var id: String = "",
                  var key: String = "",
                  var name: String = "",
                  var site: String = "",
-                 var type: String = "") {
-}
+                 var type: String = "")
