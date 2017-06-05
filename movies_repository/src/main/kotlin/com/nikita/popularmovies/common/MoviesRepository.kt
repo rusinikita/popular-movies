@@ -8,6 +8,8 @@ import com.nikita.popularmovies.common.models.MovieDetails
 import com.nikita.popularmovies.common.models.MoviePreview
 import com.nikita.popularmovies.common.network.MoviesApi
 import com.nikita.popularmovies.common.network.executeUnsafe
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
@@ -34,8 +36,8 @@ class MovieRepositoryImpl(private val moviesDao: MovieDao,
     val movieId = moviePreview.id
     var result = moviesDao.getMovie(movieId)
     if (result == null) {
-      val videos = moviesService.getVideos(movieId).executeUnsafe()
-      val reviews = moviesService.getReviews(movieId).executeUnsafe()
+      val videos = moviesService.getVideos(movieId).executeUnsafe().results
+      val reviews = moviesService.getReviews(movieId).executeUnsafe().results
       result = MovieDetails(moviePreview, videos, reviews)
     }
     return result
@@ -46,7 +48,11 @@ fun createMovieRepository(context: Application): MovieRepository {
   val db = Room.databaseBuilder(context, Database::class.java, "database")
     .build()
     .movieDao()
+  val okHttp = OkHttpClient.Builder()
+    .addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY })
+    .build()
   val api = Retrofit.Builder()
+    .client(okHttp)
     .baseUrl("https://api.themoviedb.org/3/")
     .addConverterFactory(MoshiConverterFactory.create())
     .build()
