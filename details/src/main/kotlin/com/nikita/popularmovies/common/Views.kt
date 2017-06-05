@@ -6,3 +6,5 @@ import android.view.View
 
 @Suppress("UNCHECKED_CAST")
 fun <T : View> Activity.findView(@IdRes id: Int) = this.findViewById(id) as T
+@Suppress("UNCHECKED_CAST")
+fun <T : View> View.findView(@IdRes id: Int) = this.findViewById(id) as T
