@@ -7,28 +7,34 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.Toolbar
+import android.view.View
 import android.widget.TextView
 import com.facebook.drawee.view.SimpleDraweeView
 import com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager
 import com.nikita.popularmovies.common.findView
+import com.nikita.popularmovies.common.isVisible
 import com.nikita.popularmovies.common.models.MoviePreview
+import com.nikita.popularmovies.common.models.Video
 import com.nikita.popularmovies.common.network.posterPathUrl
 
 class MovieDetailsActivity : LifecycleActivity() {
+  private lateinit var viewModel: MovieDetailsViewModel
   private lateinit var toolbar: Toolbar
   private lateinit var backdrop: SimpleDraweeView
   private lateinit var poster: SimpleDraweeView
   private lateinit var rating: TextView
   private lateinit var releaseDate: TextView
   private lateinit var overview: TextView
-  private val videosAdapter = VideosAdapter(videoClickAction = { TODO()})
+  private lateinit var saveButton: View
+  private lateinit var progressBar: View
+  private val videosAdapter = VideosAdapter(videoClickAction = { openTrailer(it)})
   private val reviewsAdapter = ReviewsAdapter()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.movie_details_activity)
     initViews()
-    subscribeViewModel(savedInstanceState)
+    subscribeViewModel()
   }
 
   private fun initViews() {
@@ -38,15 +44,21 @@ class MovieDetailsActivity : LifecycleActivity() {
     rating = findView(R.id.rating)
     releaseDate = findView(R.id.date)
     overview = findView(R.id.overview)
+    saveButton = findViewById(R.id.fab)
+    progressBar = findViewById(R.id.progress_bar)
+    saveButton.setOnClickListener { viewModel.onFavoriteClick() }
     val videosPager: HorizontalInfiniteCycleViewPager = findView(R.id.videos)
     videosPager.adapter = videosAdapter
     val reviewsPager: HorizontalInfiniteCycleViewPager = findView(R.id.reviews)
     reviewsPager.adapter = reviewsAdapter
   }
 
-  private fun subscribeViewModel(savedInstanceState: Bundle?) {
+  private fun subscribeViewModel() {
     val movie = intent.getParcelableExtra<MoviePreview>(EXTRA_MOVIE)
     val viewModel = ViewModelProviders.of(this, MovieDetailsViewModelFactory(this, movie)).get(MovieDetailsViewModel::class.java)
+
+    this.viewModel = viewModel
+
     viewModel.movieDetailsLiveData.observe(this, Observer { data -> data?.let { render(it) } })
   }
 
@@ -60,8 +72,15 @@ class MovieDetailsActivity : LifecycleActivity() {
     releaseDate.text = moviePreview.releaseDate
     overview.text = moviePreview.overview
 
+    saveButton.isVisible = !model.isLoading
+    progressBar.isVisible = model.isLoading
+
     videosAdapter.changeData(moviePreview.backdropPath, model.content.videos)
     reviewsAdapter.changeData(model.content.reviews)
+  }
+
+  private fun openTrailer(video: Video) {
+
   }
 
   companion object {

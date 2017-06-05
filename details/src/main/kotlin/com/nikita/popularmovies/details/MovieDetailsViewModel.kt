@@ -49,4 +49,15 @@ class MovieDetailsViewModel(initialMoviePreview: MoviePreview,
       movieDetailsLiveData.postValue(movieDetailsScreen)
     }
   }
+
+  fun onFavoriteClick() {
+    launch(UI) {
+      async(CommonPool) {
+        movieDetailsLiveData.value?.let {
+          print(it)
+          moviesRepository.saveMovie(it.content)
+        }
+      }.await()
+    }
+  }
 }
