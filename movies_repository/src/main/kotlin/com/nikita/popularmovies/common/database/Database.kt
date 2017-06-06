@@ -18,6 +18,9 @@ interface MovieDao {
   @Insert
   fun insertPreview(movie: MoviePreview)
 
+  @Delete
+  fun deleteMovie(movie: MoviePreview)
+
   @Insert
   fun insertVideos(videos: List<Video>)
 

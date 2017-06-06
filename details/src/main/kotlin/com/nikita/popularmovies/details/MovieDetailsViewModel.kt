@@ -52,13 +52,17 @@ class MovieDetailsViewModel(initialMoviePreview: MoviePreview,
 
   fun onFavoriteClick() {
     launch(UI) {
-      async(CommonPool) {
+      val movie = async(CommonPool) {
         movieDetailsLiveData.value?.let {
-          // TODO fix second click crash
           print(it)
-          moviesRepository.saveMovie(it.content)
+          if (it.content.isSaved) {
+            moviesRepository.saveMovie(it.content)
+          } else {
+            moviesRepository.deleteMovie(it.content)
+          }
         }
       }.await()
+      movieDetailsLiveData.postValue(MovieDetailsScreen(false, null, movie!!))
     }
   }
 }

@@ -5,6 +5,7 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.v7.widget.Toolbar
 import android.view.View
@@ -80,7 +81,7 @@ class MovieDetailsActivity : LifecycleActivity() {
   }
 
   private fun openTrailer(video: Video) {
-
+    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("http://www.youtube.com/watch?v=${video.key}")))
   }
 
   companion object {

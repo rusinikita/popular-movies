@@ -15,7 +15,8 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 interface MovieRepository {
   fun getFavoriteMovies(): List<MoviePreview>
-  fun saveMovie(movie: MovieDetails)
+  fun saveMovie(movie: MovieDetails): MovieDetails
+  fun deleteMovie(movie: MovieDetails): MovieDetails
   fun getMovieDetails(moviePreview: MoviePreview): MovieDetails
 }
 
@@ -26,10 +27,18 @@ class MovieRepositoryImpl(private val moviesDao: MovieDao,
     return moviesDao.getAll()
   }
 
-  override fun saveMovie(movie: MovieDetails) {
+  override fun saveMovie(movie: MovieDetails): MovieDetails {
     moviesDao.insertPreview(movie.moviePreview)
     moviesDao.insertVideos(movie.videos)
     moviesDao.insertReviews(movie.reviews)
+    movie.isSaved = true
+    return movie
+  }
+
+  override fun deleteMovie(movie: MovieDetails): MovieDetails {
+    moviesDao.deleteMovie(movie.moviePreview)
+    movie.isSaved = false
+    return movie
   }
 
   override fun getMovieDetails(moviePreview: MoviePreview): MovieDetails {
@@ -39,6 +48,8 @@ class MovieRepositoryImpl(private val moviesDao: MovieDao,
       val videos = moviesService.getVideos(movieId).executeUnsafe().results.map { it.copy(movieId = movieId) }
       val reviews = moviesService.getReviews(movieId).executeUnsafe().results.map { it.copy(movieId = movieId) }
       result = MovieDetails(moviePreview, videos, reviews)
+    } else {
+      result.isSaved = true
     }
     return result
   }
