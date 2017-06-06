@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 android {
   compileSdkVersion 25
@@ -24,6 +25,11 @@ android {
   sourceSets {
     main.java.srcDirs += 'src/main/kotlin'
   }
+}
+
+kapt {
+  // need for usage generated classes in code
+  generateStubs = true
 }
 
 dependencies {
