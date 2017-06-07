@@ -14,6 +14,7 @@ public final class MovieDetails {
   public List<Video> videos;
   @Relation(parentColumn = "id", entityColumn = "movie_id")
   public List<Review> reviews;
+  @Ignore
   public boolean isSaved = false;
 
   public MovieDetails() {}

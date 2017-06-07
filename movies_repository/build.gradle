@@ -13,6 +13,12 @@ android {
     versionName "1.0"
 
     buildConfigField 'String', 'API_KEY', "\"$API_KEY\""
+
+    javaCompileOptions {
+      annotationProcessorOptions {
+        arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+      }
+    }
   }
 
   buildTypes {
@@ -25,11 +31,6 @@ android {
   sourceSets {
     main.java.srcDirs += 'src/main/kotlin'
   }
-}
-
-kapt {
-  // need for usage generated classes in code
-  generateStubs = true
 }
 
 dependencies {

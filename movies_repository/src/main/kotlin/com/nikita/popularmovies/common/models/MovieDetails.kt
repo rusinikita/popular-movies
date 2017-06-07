@@ -7,17 +7,17 @@ import android.arch.persistence.room.*
 
 @Entity(foreignKeys = arrayOf(ForeignKey(entity = MoviePreview::class, parentColumns = arrayOf("id"), childColumns = arrayOf("movie_id"))),
   indices = arrayOf(Index(value = "movie_id")))
-data class Review(@field:PrimaryKey var id: String = "",
-                  @field:ColumnInfo(name = "movie_id") var movieId: String = "",
-                  var author: String = "",
-                  var content: String = "",
-                  var url: String = "")
+data class Review(@field:PrimaryKey val id: String,
+                  @field:ColumnInfo(name = "movie_id") val movieId: String,
+                  val author: String,
+                  val content: String,
+                  val url: String)
 
 @Entity(foreignKeys = arrayOf(ForeignKey(entity = MoviePreview::class, parentColumns = arrayOf("id"), childColumns = arrayOf("movie_id"))),
   indices = arrayOf(Index(value = "movie_id")))
-data class Video(@field:PrimaryKey var id: String = "",
-                 @field:ColumnInfo(name = "movie_id") var movieId: String = "",
-                 var key: String = "",
-                 var name: String = "",
-                 var site: String = "",
-                 var type: String = "")
+data class Video(@field:PrimaryKey val id: String,
+                 @field:ColumnInfo(name = "movie_id") val movieId: String,
+                 val key: String,
+                 val name: String,
+                 val site: String,
+                 val type: String)

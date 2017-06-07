@@ -12,7 +12,7 @@ interface MovieDao {
   @Query("SELECT * FROM movie")
   fun getAll(): List<MoviePreview>
 
-  @Query("SELECT * FROM movie WHERE id LIKE :arg0") // wow, fail at compile time with :movieId
+  @Query("SELECT * FROM movie WHERE id LIKE :p0") // wow, fail at compile time with :movieId
   fun getMovie(movieId: String): MovieDetails?
 
   @Insert
