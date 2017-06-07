@@ -7,9 +7,12 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.support.design.widget.Snackbar
+import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.widget.Toolbar
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import com.facebook.drawee.view.SimpleDraweeView
 import com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager
 import com.nikita.popularmovies.common.findView
@@ -78,6 +81,11 @@ class MovieDetailsActivity : LifecycleActivity() {
 
     videosAdapter.changeData(moviePreview.backdropPath, model.content.videos)
     reviewsAdapter.changeData(model.content.reviews)
+
+    if (model.message > 0) {
+      Snackbar.make(toolbar, model.message, Snackbar.LENGTH_SHORT).show()
+    }
+    model.error?.let { Snackbar.make(toolbar, model.error.message!!, Snackbar.LENGTH_SHORT).show() }
   }
 
   private fun openTrailer(video: Video) {

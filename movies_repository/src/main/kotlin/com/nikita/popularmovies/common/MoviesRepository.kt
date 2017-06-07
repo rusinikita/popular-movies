@@ -36,6 +36,7 @@ class MovieRepositoryImpl(private val moviesDao: MovieDao,
   }
 
   override fun deleteMovie(movie: MovieDetails): MovieDetails {
+    // TODO fix deleting FOREIGN KEY constraint failed
     moviesDao.deleteMovie(movie.moviePreview)
     movie.isSaved = false
     return movie

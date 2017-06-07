@@ -52,17 +52,26 @@ class MovieDetailsViewModel(initialMoviePreview: MoviePreview,
 
   fun onFavoriteClick() {
     launch(UI) {
-      val movie = async(CommonPool) {
-        movieDetailsLiveData.value?.let {
-          print(it)
-          if (it.content.isSaved) {
-            moviesRepository.saveMovie(it.content)
-          } else {
-            moviesRepository.deleteMovie(it.content)
+      val value = movieDetailsLiveData.value!!
+      val screen = try {
+        val (movie, message) = async(CommonPool) {
+          value.let {
+            print(it)
+            if (!it.content.isSaved) {
+              moviesRepository.saveMovie(it.content) to R.string.movie_saved
+            } else {
+              moviesRepository.deleteMovie(it.content) to R.string.movie_removed
+            }
           }
-        }
-      }.await()
-      movieDetailsLiveData.postValue(MovieDetailsScreen(false, null, movie!!))
+        }.await()
+
+        MovieDetailsScreen(false, content = movie, message = message)
+      } catch (e: Throwable) {
+        print(e)
+        MovieDetailsScreen(false, error = e, content = value.content)
+      }
+
+      movieDetailsLiveData.postValue(screen)
     }
   }
 }
