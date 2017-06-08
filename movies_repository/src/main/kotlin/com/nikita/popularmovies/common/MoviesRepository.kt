@@ -2,8 +2,8 @@ package com.nikita.popularmovies.common
 
 import android.app.Application
 import android.arch.persistence.room.Room
-import com.nikita.popularmovies.common.database.Database
 import com.nikita.popularmovies.common.database.MovieDao
+import com.nikita.popularmovies.common.database.PopularMoviesDatabase
 import com.nikita.popularmovies.common.models.MovieDetails
 import com.nikita.popularmovies.common.models.MoviePreview
 import com.nikita.popularmovies.common.network.MoviesApi
@@ -57,7 +57,7 @@ class MovieRepositoryImpl(private val moviesDao: MovieDao,
 }
 
 fun createMovieRepository(context: Application): MovieRepository {
-  val db = Room.databaseBuilder(context, Database::class.java, "database")
+  val db = Room.databaseBuilder(context, PopularMoviesDatabase::class.java, "database")
     .build()
     .movieDao()
   val okHttp = OkHttpClient.Builder()
