@@ -46,8 +46,8 @@ class MovieRepositoryImpl(private val moviesDao: MovieDao,
     val movieId = moviePreview.id
     var result = moviesDao.getMovie(movieId)
     if (result == null) {
-      val videos = moviesService.getVideos(movieId).executeUnsafe().results.map { it.copy(movieId = movieId) }
-      val reviews = moviesService.getReviews(movieId).executeUnsafe().results.map { it.copy(movieId = movieId) }
+      val videos = moviesService.getVideos(movieId).executeUnsafe().results.map { it.withMovieId(movieId) }
+      val reviews = moviesService.getReviews(movieId).executeUnsafe().results.map { it.withMovieId(movieId) }
       result = MovieDetails(moviePreview, videos, reviews)
     } else {
       result.isSaved = true
