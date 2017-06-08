@@ -7,7 +7,7 @@ import com.nikita.popularmovies.common.database.PopularMoviesDatabase
 import com.nikita.popularmovies.common.models.MovieDetails
 import com.nikita.popularmovies.common.models.MoviePreview
 import com.nikita.popularmovies.common.network.MoviesApi
-import com.nikita.popularmovies.common.network.executeUnsafe
+import com.nikita.popularmovies.common.network.Network
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -46,8 +46,8 @@ class MovieRepositoryImpl(private val moviesDao: MovieDao,
     val movieId = moviePreview.id
     var result = moviesDao.getMovie(movieId)
     if (result == null) {
-      val videos = moviesService.getVideos(movieId).executeUnsafe().results.map { it.withMovieId(movieId) }
-      val reviews = moviesService.getReviews(movieId).executeUnsafe().results.map { it.withMovieId(movieId) }
+      val videos = Network.executeUnsafe(moviesService.getVideos(movieId)).results.map { it.withMovieId(movieId) }
+      val reviews = Network.executeUnsafe(moviesService.getReviews(movieId)).results.map { it.withMovieId(movieId) }
       result = MovieDetails(moviePreview, videos, reviews)
     } else {
       result.isSaved = true

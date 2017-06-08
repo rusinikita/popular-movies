@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import com.facebook.drawee.view.SimpleDraweeView
 import com.nikita.popularmovies.common.findView
 import com.nikita.popularmovies.common.models.Video
-import com.nikita.popularmovies.common.network.posterPathUrl
+import com.nikita.popularmovies.common.network.Network
 
 class VideosAdapter(private var backdrop: String = "",
                     private var videos: List<Video> = emptyList(),
@@ -24,7 +24,7 @@ class VideosAdapter(private var backdrop: String = "",
 
     val preview: SimpleDraweeView = view.findView(R.id.preview)
     val video = videos[position]
-    preview.setImageURI(if (video.site.toLowerCase() == "youtube") "http://img.youtube.com/vi/${video.key}/0.jpg" else backdrop.posterPathUrl)
+    preview.setImageURI(if (video.site.toLowerCase() == "youtube") "http://img.youtube.com/vi/${video.key}/0.jpg" else Network.posterPathUrl(backdrop))
     preview.setOnClickListener({ videoClickAction(video) })
 
     container.addView(view)

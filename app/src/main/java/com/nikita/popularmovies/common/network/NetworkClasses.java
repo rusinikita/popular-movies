@@ -14,7 +14,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
-public final class Network {
+public final class NetworkClasses {
 
   public interface Parser<DATA> {
     DATA parse(JSONObject object) throws JSONException;

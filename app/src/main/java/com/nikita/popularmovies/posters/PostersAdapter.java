@@ -17,7 +17,7 @@ import com.nikita.popularmovies.R;
 import com.nikita.popularmovies.common.Constants;
 import com.nikita.popularmovies.common.ResourcesUtils;
 import com.nikita.popularmovies.common.models.Poster;
-import com.nikita.popularmovies.common.network.NetworkKt;
+import com.nikita.popularmovies.common.network.Network;
 import com.nikita.popularmovies.common.network.Request;
 
 import java.util.Collections;
@@ -102,7 +102,7 @@ public final class PostersAdapter extends RecyclerView.Adapter {
         .setPlaceholderImage(new ColorDrawable(placeholderColor))
         .build();
       posterHolder.image.setHierarchy(hierarchy);
-      posterHolder.image.setImageURI(NetworkKt.getPosterPathUrl(getItem(position).posterPath()));
+      posterHolder.image.setImageURI(Network.posterPathUrl(getItem(position).posterPath()));
     } else if (holder instanceof TopicHolder) {
       ((TopicHolder) holder).title.setText(ResourcesUtils.topicTitleRes(movieTopic));
     }

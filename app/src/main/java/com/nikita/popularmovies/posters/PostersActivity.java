@@ -21,7 +21,7 @@ import com.nikita.popularmovies.common.ResourcesUtils;
 import com.nikita.popularmovies.common.models.MoviePreview;
 import com.nikita.popularmovies.common.models.PageResponse;
 import com.nikita.popularmovies.common.models.Poster;
-import com.nikita.popularmovies.common.network.Network;
+import com.nikita.popularmovies.common.network.NetworkClasses;
 import com.nikita.popularmovies.common.network.Request;
 import com.nikita.popularmovies.common.views.ErrorView;
 import com.nikita.popularmovies.details.MovieDetailsActivity;
@@ -125,9 +125,9 @@ public class PostersActivity extends AppCompatActivity {
   private void loadSaved() {
     errorView.hideError();
     loadingView.show();
-    new GetSavedMoviesTask(this).execute(new Network.DataCallback<List<MoviePreview>>() {
+    new GetSavedMoviesTask(this).execute(new NetworkClasses.DataCallback<List<MoviePreview>>() {
       @Override
-      public void onResult(Network.FetchResult<List<MoviePreview>> result) {
+      public void onResult(NetworkClasses.FetchResult<List<MoviePreview>> result) {
         loadingView.hide();
         if (result.error == null) {
           errorView.hideError();
@@ -153,16 +153,16 @@ public class PostersActivity extends AppCompatActivity {
   private void loadFromNetwork() {
     errorView.hideError();
     loadingView.show();
-    Request.movieList(selectedTopic, new Network.DataCallback<PageResponse<MoviePreview>>() {
+    Request.movieList(selectedTopic, new NetworkClasses.DataCallback<PageResponse<MoviePreview>>() {
       @Override
-      public void onResult(Network.FetchResult<PageResponse<MoviePreview>> result) {
+      public void onResult(NetworkClasses.FetchResult<PageResponse<MoviePreview>> result) {
         loadingView.hide();
         if (result.error == null) {
           errorView.hideError();
           contentView.setVisibility(View.VISIBLE);
 
           List<Poster> posters = new ArrayList<>();
-          posters.addAll(result.data.getResults());
+          posters.addAll(result.data.results);
           postersAdapter.setPosters(posters);
           postersAdapter.setTopic(selectedTopic);
         } else {

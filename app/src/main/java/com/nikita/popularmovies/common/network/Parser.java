@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class Parser {
-  public static final class MovieList implements Network.Parser<PageResponse<MoviePreview>> {
+  public static final class MovieList implements NetworkClasses.Parser<PageResponse<MoviePreview>> {
     @Override
     public PageResponse<MoviePreview> parse(JSONObject object) throws JSONException {
       int page = object.getInt("page");

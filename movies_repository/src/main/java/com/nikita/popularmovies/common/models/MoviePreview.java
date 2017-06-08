@@ -7,8 +7,6 @@ import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import static com.nikita.popularmovies.common.models.SectionKt.MOVIE;
-
 @Entity(tableName = "movie")
 public final class MoviePreview implements Poster, Parcelable {
   @PrimaryKey
@@ -87,7 +85,7 @@ public final class MoviePreview implements Poster, Parcelable {
   public String section() {
     //Example java lint problems with StringDef, IntDef
     //noinspection WrongConstant
-    return MOVIE;
+    return Section.MOVIE;
   }
 
   @Override

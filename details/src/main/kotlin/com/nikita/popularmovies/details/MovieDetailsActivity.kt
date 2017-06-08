@@ -12,14 +12,13 @@ import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.widget.Toolbar
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import com.facebook.drawee.view.SimpleDraweeView
 import com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager
-import com.nikita.popularmovies.common.findView
 import com.nikita.popularmovies.common.isVisible
 import com.nikita.popularmovies.common.models.MoviePreview
 import com.nikita.popularmovies.common.models.Video
-import com.nikita.popularmovies.common.network.posterPathUrl
+import com.nikita.popularmovies.common.network.Network
+import com.nikita.popularmovies.common.findView
 
 class MovieDetailsActivity : LifecycleActivity() {
   private lateinit var viewModel: MovieDetailsViewModel
@@ -70,8 +69,8 @@ class MovieDetailsActivity : LifecycleActivity() {
     val moviePreview = model.content.moviePreview
 
     toolbar.title = moviePreview.title
-    backdrop.setImageURI(moviePreview.backdropPath.posterPathUrl)
-    poster.setImageURI(moviePreview.posterPath.posterPathUrl)
+    backdrop.setImageURI(Network.posterPathUrl(moviePreview.backdropPath))
+    poster.setImageURI(Network.posterPathUrl(moviePreview.posterPath))
     rating.text = moviePreview.voteAverage.toString()
     releaseDate.text = moviePreview.releaseDate
     overview.text = moviePreview.overview

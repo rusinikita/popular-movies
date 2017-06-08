@@ -13,7 +13,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.nikita.popularmovies.common.models.SectionKt.MOVIE;
+import static com.nikita.popularmovies.common.models.Section.MOVIE;
 
 public final class Request {
   private static final String BASE_URL = "https://api.themoviedb.org/3/";
@@ -37,13 +37,13 @@ public final class Request {
     return Arrays.asList(SAVED, POPULAR, TOP_RATED, UPCOMING, NOW_PLAYING);
   }
 
-  public static void movieList(@MovieTopic String topic, Network.DataCallback<PageResponse<MoviePreview>> callback) {
+  public static void movieList(@MovieTopic String topic, NetworkClasses.DataCallback<PageResponse<MoviePreview>> callback) {
     Uri buildUri = Uri.parse(BASE_URL).buildUpon()
       .appendPath(MOVIE)
       .appendPath(topic)
       .appendQueryParameter(API_KEY, BuildConfig.API_KEY)
       .build();
 
-    new Network.FetchDataTask<>(buildUri, new Parser.MovieList()).execute(callback);
+    new NetworkClasses.FetchDataTask<>(buildUri, new Parser.MovieList()).execute(callback);
   }
 }
