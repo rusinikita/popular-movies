@@ -13,7 +13,7 @@ public final class Network {
   public static final String IMAGE_BASE_URL = "https://image.tmdb.org/t/p";
 
   public static String posterPathUrl(String posterPath) {
-    return IMAGE_BASE_URL + "/w500$this";
+    return IMAGE_BASE_URL + "/w500" + posterPath;
   }
 
   public final static class ApiError extends RuntimeException {
