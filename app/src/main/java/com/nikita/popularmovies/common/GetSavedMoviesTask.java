@@ -15,7 +15,7 @@ public final class GetSavedMoviesTask extends AsyncTask<NetworkClasses.DataCallb
   private MovieRepository movieRepository;
 
   public GetSavedMoviesTask(Context context) {
-    movieRepository = MovieRepositoryFabrica.create(context);
+    movieRepository = MovieRepositoryFactory.create(context);
   }
 
   @Override

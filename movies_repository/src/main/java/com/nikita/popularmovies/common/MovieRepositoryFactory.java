@@ -13,7 +13,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.moshi.MoshiConverterFactory;
 
-public final class MovieRepositoryFabrica {
+public final class MovieRepositoryFactory {
   public static MovieRepository create(Context context) {
     Application application = (Application) context.getApplicationContext();
     MovieDao db = Room.databaseBuilder(context, PopularMoviesDatabase.class, "database")
