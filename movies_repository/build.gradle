@@ -1,6 +1,4 @@
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
 
 android {
   compileSdkVersion 25
@@ -27,17 +25,11 @@ android {
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
   }
-
-  sourceSets {
-    main.java.srcDirs += 'src/main/kotlin'
-  }
 }
 
 dependencies {
-  compile rootProject.ext.kotlin_std
-
   compile "android.arch.persistence.room:runtime:1.0.0-alpha1"
-  kapt "android.arch.persistence.room:compiler:1.0.0-alpha1"
+  annotationProcessor "android.arch.persistence.room:compiler:1.0.0-alpha1"
 
   compile 'com.squareup.retrofit2:retrofit:2.3.0'
   compile 'com.squareup.okhttp3:logging-interceptor:3.8.0'

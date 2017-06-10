@@ -6,7 +6,7 @@ import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import android.content.Context
 import com.nikita.popularmovies.common.MovieRepository
-import com.nikita.popularmovies.common.createMovieRepository
+import com.nikita.popularmovies.common.MovieRepositoryFabrica
 import com.nikita.popularmovies.common.models.MovieDetails
 import com.nikita.popularmovies.common.models.MoviePreview
 import kotlinx.coroutines.experimental.CommonPool
@@ -18,7 +18,7 @@ class MovieDetailsViewModelFactory(private val context: Context, private val pre
   override fun <T : ViewModel> create(klass: Class<T>): T {
     if (klass == MovieDetailsViewModel::class.java) {
       @Suppress("UNCHECKED_CAST")
-      return MovieDetailsViewModel(preview, createMovieRepository(context.applicationContext as Application)) as T
+      return MovieDetailsViewModel(preview, MovieRepositoryFabrica.create(context)) as T
     } else {
       throw IllegalArgumentException()
     }

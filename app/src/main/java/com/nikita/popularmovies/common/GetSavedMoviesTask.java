@@ -1,6 +1,5 @@
 package com.nikita.popularmovies.common;
 
-import android.app.Application;
 import android.content.Context;
 import android.os.AsyncTask;
 
@@ -16,7 +15,7 @@ public final class GetSavedMoviesTask extends AsyncTask<NetworkClasses.DataCallb
   private MovieRepository movieRepository;
 
   public GetSavedMoviesTask(Context context) {
-    movieRepository = MoviesRepositoryKt.createMovieRepository((Application) context.getApplicationContext());
+    movieRepository = MovieRepositoryFabrica.create(context);
   }
 
   @Override
