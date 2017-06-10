@@ -64,7 +64,7 @@ class MovieDetailsActivity : LifecycleActivity() {
     viewModel.movieDetailsLiveData.observe(this, Observer { data -> data?.let { render(it) } })
   }
 
-  private fun render(model: MovieDetailsScreen) {
+  private fun render(model: MovieDetailsState) {
     val moviePreview = model.content.moviePreview
 
     toolbar.title = moviePreview.title

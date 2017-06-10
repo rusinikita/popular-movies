@@ -1,6 +1,5 @@
 package com.nikita.popularmovies.details
 
-import android.app.Application
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
@@ -27,23 +26,24 @@ class MovieDetailsViewModelFactory(private val context: Context, private val pre
 
 class MovieDetailsViewModel(initialMoviePreview: MoviePreview,
                             private val moviesRepository: MovieRepository) : ViewModel() {
-  val movieDetailsLiveData = MutableLiveData<MovieDetailsScreen>()
+  val movieDetailsLiveData = MutableLiveData<MovieDetailsState>()
 
   init {
-    val initialScreenData = MovieDetailsScreen(
-      isLoading = true,
-      error = null,
-      content = MovieDetails(initialMoviePreview))
+    val initialScreenData = MovieDetailsState
+      .ofContent(MovieDetails(initialMoviePreview))
+      .withLoading(true)
     movieDetailsLiveData.postValue(initialScreenData)
 
     launch(UI) {
       val movieDetailsScreen = try {
         async(CommonPool) { moviesRepository.getMovieDetails(initialMoviePreview) }
           .await()
-          .let { movieDetails -> initialScreenData.copy(isLoading = false, content = movieDetails) }
+          .let { movieDetails -> MovieDetailsState.ofContent(movieDetails) }
       } catch (e: Throwable) {
         e.printStackTrace()
-        initialScreenData.copy(isLoading = false, error = e)
+        initialScreenData
+          .withError(e)
+          .withLoading(false)
       }
 
       movieDetailsLiveData.postValue(movieDetailsScreen)
@@ -65,10 +65,14 @@ class MovieDetailsViewModel(initialMoviePreview: MoviePreview,
           }
         }.await()
 
-        MovieDetailsScreen(false, content = movie, message = message)
+        MovieDetailsState
+          .ofContent(movie)
+          .withMessage(message)
       } catch (e: Throwable) {
         print(e)
-        MovieDetailsScreen(false, error = e, content = value.content)
+        MovieDetailsState
+          .ofContent(value.content)
+          .withError(e)
       }
 
       movieDetailsLiveData.postValue(screen)
