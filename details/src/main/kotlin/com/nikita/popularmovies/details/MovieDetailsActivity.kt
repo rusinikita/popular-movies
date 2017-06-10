@@ -14,11 +14,10 @@ import android.view.View
 import android.widget.TextView
 import com.facebook.drawee.view.SimpleDraweeView
 import com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager
-import com.nikita.popularmovies.common.isVisible
+import com.nikita.popularmovies.Views
 import com.nikita.popularmovies.common.models.MoviePreview
 import com.nikita.popularmovies.common.models.Video
 import com.nikita.popularmovies.common.network.Network
-import com.nikita.popularmovies.common.findView
 
 class MovieDetailsActivity : LifecycleActivity() {
   private lateinit var viewModel: MovieDetailsViewModel
@@ -30,7 +29,7 @@ class MovieDetailsActivity : LifecycleActivity() {
   private lateinit var overview: TextView
   private lateinit var saveButton: View
   private lateinit var progressBar: View
-  private val videosAdapter = VideosAdapter(videoClickAction = { openTrailer(it)})
+  private val videosAdapter = VideosAdapter({ openTrailer(it)})
   private val reviewsAdapter = ReviewsAdapter()
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,18 +40,18 @@ class MovieDetailsActivity : LifecycleActivity() {
   }
 
   private fun initViews() {
-    toolbar = findView(R.id.toolbar)
-    backdrop = findView(R.id.backdrop)
-    poster = findView(R.id.poster)
-    rating = findView(R.id.rating)
-    releaseDate = findView(R.id.date)
-    overview = findView(R.id.overview)
+    toolbar = Views.findView(this, R.id.toolbar)
+    backdrop = Views.findView(this, R.id.backdrop)
+    poster = Views.findView(this, R.id.poster)
+    rating = Views.findView(this, R.id.rating)
+    releaseDate = Views.findView(this, R.id.date)
+    overview = Views.findView(this, R.id.overview)
     saveButton = findViewById(R.id.fab)
     progressBar = findViewById(R.id.progress_bar)
     saveButton.setOnClickListener { viewModel.onFavoriteClick() }
-    val videosPager: HorizontalInfiniteCycleViewPager = findView(R.id.videos)
+    val videosPager: HorizontalInfiniteCycleViewPager = Views.findView(this, R.id.videos)
     videosPager.adapter = videosAdapter
-    val reviewsPager: HorizontalInfiniteCycleViewPager = findView(R.id.reviews)
+    val reviewsPager: HorizontalInfiniteCycleViewPager = Views.findView(this, R.id.reviews)
     reviewsPager.adapter = reviewsAdapter
   }
 
@@ -75,8 +74,8 @@ class MovieDetailsActivity : LifecycleActivity() {
     releaseDate.text = moviePreview.releaseDate
     overview.text = moviePreview.overview
 
-    saveButton.isVisible = !model.isLoading
-    progressBar.isVisible = model.isLoading
+    Views.setVisible(saveButton, !model.isLoading)
+    Views.setVisible(progressBar, model.isLoading)
 
     videosAdapter.changeData(moviePreview.backdropPath, model.content.videos)
     reviewsAdapter.changeData(model.content.reviews)
