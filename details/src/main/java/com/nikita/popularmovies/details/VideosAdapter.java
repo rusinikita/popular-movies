@@ -39,7 +39,7 @@ public final class VideosAdapter extends PagerAdapter {
     SimpleDraweeView content = Views.findView(view, R.id.preview);
     final Video video = videos.get(position);
     content.setImageURI(video.site.toLowerCase().equals("youtube") ? ("http://img.youtube.com/vi/" + video.key + "/0.jpg") : Network.posterPathUrl(backdrop));
-    container.setOnClickListener(new View.OnClickListener() {
+    content.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
         videoClickAction.onVideoClick(video);
