@@ -7,8 +7,7 @@
         android:allowBackup="true"
         android:supportsRtl="true"
         >
-
-        <activity android:name=".MovieDetailsActivity"/>
+        <activity android:name="com.nikita.popularmovies.details.MovieDetailsActivity"/>
     </application>
 
 </manifest>

@@ -1,8 +1,11 @@
 package com.nikita.popularmovies.common;
 
+import android.content.ContentResolver;
 import android.content.Context;
+import android.database.Cursor;
 import android.os.AsyncTask;
 
+import com.nikita.popularmovies.common.database.MoviesContract;
 import com.nikita.popularmovies.common.models.MoviePreview;
 import com.nikita.popularmovies.common.network.NetworkClasses;
 
@@ -12,10 +15,10 @@ import java.util.List;
 
 public final class GetSavedMoviesTask extends AsyncTask<NetworkClasses.DataCallback<List<MoviePreview>>, Object, NetworkClasses.FetchResult<List<MoviePreview>>> {
   private List<NetworkClasses.DataCallback<List<MoviePreview>>> callbacks = new LinkedList<>();
-  private MovieRepository movieRepository;
+  private ContentResolver contentResolver;
 
   public GetSavedMoviesTask(Context context) {
-    movieRepository = MovieRepositoryFactory.create(context);
+    contentResolver = context.getContentResolver();
   }
 
   @Override
@@ -23,7 +26,15 @@ public final class GetSavedMoviesTask extends AsyncTask<NetworkClasses.DataCallb
     callbacks.clear();
     callbacks.addAll(Arrays.asList(params));
     try {
-      return new NetworkClasses.FetchResult<>(movieRepository.getFavoriteMovies(), null);
+      Cursor cursor = contentResolver.query(MoviesContract.MovieEntity.CONTENT_URI,
+        null,
+        null,
+        null,
+        null);
+
+      List<MoviePreview> moviePreviews = MoviesContract.MovieEntity.getPreviewsFromCrsor(cursor);
+
+      return new NetworkClasses.FetchResult<>(moviePreviews, null);
     } catch (Throwable throwable) {
       return new NetworkClasses.FetchResult<>(null, throwable);
     }
