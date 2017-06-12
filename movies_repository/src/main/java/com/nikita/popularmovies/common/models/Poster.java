@@ -1,6 +1,8 @@
 package com.nikita.popularmovies.common.models;
 
-public interface Poster {
+import android.os.Parcelable;
+
+public interface Poster extends Parcelable {
   String id();
   String title();
   String posterPath();

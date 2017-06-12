@@ -23,9 +23,9 @@ import com.nikita.popularmovies.common.network.Request;
 import java.util.Collections;
 import java.util.List;
 
-public final class PostersAdapter extends RecyclerView.Adapter {
+final class PostersAdapter extends RecyclerView.Adapter {
 
-  public PosterClickAction posterClickAction;
+  PosterClickAction posterClickAction;
 
   @Request.MovieTopic
   private String movieTopic = "";
@@ -34,19 +34,23 @@ public final class PostersAdapter extends RecyclerView.Adapter {
   private final int spanCount;
   private final int topicTitlePosition;
 
-  public PostersAdapter(int spanCount) {
+  PostersAdapter(int spanCount) {
     this.spanCount = spanCount;
     this.topicTitlePosition = spanCount % 2;
   }
 
-  public void setTopic(@Request.MovieTopic String movieTopic) {
+  void setTopic(@Request.MovieTopic String movieTopic) {
     this.movieTopic = movieTopic;
     notifyItemChanged(topicTitlePosition);
   }
 
-  public void setPosters(List<Poster> posters) {
+  void setPosters(List<Poster> posters) {
     this.posters = posters;
     notifyDataSetChanged();
+  }
+
+  public List<Poster> getPosters() {
+    return posters;
   }
 
   private Poster getItem(int adapterPosition) {

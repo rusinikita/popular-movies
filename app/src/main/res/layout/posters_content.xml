@@ -22,12 +22,14 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         style="?android:attr/progressBarStyle"
+        android:visibility="gone"
         />
 
     <com.nikita.popularmovies.common.views.ErrorView
         android:id="@+id/error_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="gone"
         />
 
 </merge>

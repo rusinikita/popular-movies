@@ -31,6 +31,7 @@ import java.util.List;
 
 public class PostersActivity extends AppCompatActivity {
   private static final String KEY_SELECTED_TOPIC = "selected_topic";
+  private static final String KEY_LOADED_POSTERS = "loaded_posters";
 
   private RecyclerView contentView;
   private ContentLoadingProgressBar loadingView;
@@ -39,6 +40,7 @@ public class PostersActivity extends AppCompatActivity {
   private int spanCount;
   private PostersAdapter postersAdapter;
   private String selectedTopic = Request.POPULAR;
+  private List<Poster> loadedPosters;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +69,12 @@ public class PostersActivity extends AppCompatActivity {
       }
     };
 
-    loadMovies();
+    if (savedInstanceState != null && savedInstanceState.containsKey(KEY_LOADED_POSTERS)) {
+      loadedPosters = savedInstanceState.getParcelableArrayList(KEY_LOADED_POSTERS);
+      setLoadedData();
+    } else {
+      loadMovies();
+    }
   }
 
   private void initRecyclerView() {
@@ -111,6 +118,7 @@ public class PostersActivity extends AppCompatActivity {
   @Override
   protected void onSaveInstanceState(Bundle outState) {
     outState.putString(KEY_SELECTED_TOPIC, selectedTopic);
+    outState.putParcelableArrayList(KEY_LOADED_POSTERS, new ArrayList<>(postersAdapter.getPosters()));
     super.onSaveInstanceState(outState);
   }
 
@@ -135,8 +143,8 @@ public class PostersActivity extends AppCompatActivity {
 
           List<Poster> posters = new ArrayList<>();
           posters.addAll(result.data);
-          postersAdapter.setPosters(posters);
-          postersAdapter.setTopic(selectedTopic);
+          loadedPosters = posters;
+          setLoadedData();
         } else {
           contentView.setVisibility(View.GONE);
           errorView.showError(result.error.getMessage(), new Runnable() {
@@ -163,8 +171,8 @@ public class PostersActivity extends AppCompatActivity {
 
           List<Poster> posters = new ArrayList<>();
           posters.addAll(result.data.results);
-          postersAdapter.setPosters(posters);
-          postersAdapter.setTopic(selectedTopic);
+          loadedPosters = posters;
+          setLoadedData();
         } else {
           contentView.setVisibility(View.GONE);
           errorView.showError(result.error.getMessage(), new Runnable() {
@@ -176,5 +184,10 @@ public class PostersActivity extends AppCompatActivity {
         }
       }
     });
+  }
+
+  private void setLoadedData() {
+    postersAdapter.setPosters(loadedPosters);
+    postersAdapter.setTopic(selectedTopic);
   }
 }
