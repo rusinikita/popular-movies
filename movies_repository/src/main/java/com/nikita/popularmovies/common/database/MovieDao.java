@@ -27,6 +27,12 @@ public interface MovieDao {
   @Delete
   void deleteMovie(MoviePreview movie);
 
+  @Delete
+  void deleteReviews(List<Review> reviews);
+
+  @Delete
+  void deleteVideos(List<Video> videos);
+
   @Insert
   void insertVideos(List<Video> videos);
 

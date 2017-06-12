@@ -38,6 +38,8 @@ final class MovieRepositoryImpl implements MovieRepository {
   @Override
   public MovieDetails deleteMovie(MovieDetails movie) {
     moviesDao.deleteMovie(movie.moviePreview);
+    moviesDao.deleteReviews(movie.reviews);
+    moviesDao.deleteVideos(movie.videos);
     movie.isSaved = false;
     return movie;
   }
