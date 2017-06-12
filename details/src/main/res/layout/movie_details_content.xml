@@ -143,6 +143,37 @@
 
     </android.support.v7.widget.CardView>
 
+    <TextView
+        android:id="@+id/error_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:padding="16dp"
+        android:gravity="center"
+        android:maxLines="3"
+        android:ellipsize="end"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:text="@string/error_title"
+        app:layout_constraintTop_toBottomOf="@+id/secondCardView"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/error_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:gravity="center"
+        android:maxLines="3"
+        android:ellipsize="end"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed felis eros, lobortis in nisl et, bibendum sodales eros. Aenean eleifend erat sed magna posuere dictum. Phasellus et augue ut nisi viverra consequat."
+        app:layout_constraintTop_toBottomOf="@+id/error_title"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
     <ProgressBar
         android:id="@+id/progress_bar"
         android:layout_width="wrap_content"

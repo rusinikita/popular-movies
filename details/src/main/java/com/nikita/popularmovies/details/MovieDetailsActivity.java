@@ -31,6 +31,8 @@ public class MovieDetailsActivity extends LifecycleActivity implements VideosAda
   private TextView overview;
   private View saveButton;
   private View progressBar;
+  private View errorTitle;
+  private TextView errorMessage;
   private final VideosAdapter videosAdapter = new VideosAdapter(this);
   private final ReviewsAdapter reviewsAdapter = new ReviewsAdapter();
 
@@ -60,6 +62,8 @@ public class MovieDetailsActivity extends LifecycleActivity implements VideosAda
     rating = Views.findView(this, R.id.rating);
     releaseDate = Views.findView(this, R.id.date);
     overview = Views.findView(this, R.id.overview);
+    errorMessage = Views.findView(this, R.id.error_view);
+    errorTitle = findViewById(R.id.error_title);
     saveButton = findViewById(R.id.fab);
     progressBar = findViewById(R.id.progress_bar);
     saveButton.setOnClickListener(new View.OnClickListener() {
@@ -100,17 +104,20 @@ public class MovieDetailsActivity extends LifecycleActivity implements VideosAda
     releaseDate.setText(moviePreview.releaseDate);
     overview.setText(moviePreview.overview);
 
-    Views.setVisible(saveButton, !state.isLoading);
+    boolean hasError = state.error != null;
+    Views.setVisible(saveButton, !state.isLoading && !hasError);
     Views.setVisible(progressBar, state.isLoading);
+    Views.setVisible(errorMessage, hasError);
+    Views.setVisible(errorTitle, hasError);
+    if (hasError) {
+      errorMessage.setText(state.error.getMessage());
+    }
 
     videosAdapter.changeData(moviePreview.backdropPath, state.content.videos);
     reviewsAdapter.changeData(state.content.reviews);
 
     if (state.message > 0) {
       Snackbar.make(toolbar, state.message, Snackbar.LENGTH_SHORT).show();
-    }
-    if (state.error != null) {
-      Snackbar.make(toolbar, state.error.getMessage(), Snackbar.LENGTH_SHORT).show();
     }
   }
 }
