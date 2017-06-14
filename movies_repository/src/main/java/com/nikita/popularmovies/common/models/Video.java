@@ -1,16 +1,8 @@
 package com.nikita.popularmovies.common.models;
 
 
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.Index;
-import android.arch.persistence.room.PrimaryKey;
-
-@Entity(indices = {@Index(value = "movie_id")})
 public final class Video {
-  @PrimaryKey
   public final String id;
-  @ColumnInfo(name = "movie_id")
   public final String movieId;
   public final String key;
   public final String name;

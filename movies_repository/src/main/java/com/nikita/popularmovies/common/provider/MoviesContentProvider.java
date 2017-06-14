@@ -1,21 +1,19 @@
 package com.nikita.popularmovies.common.provider;
 
-import android.arch.persistence.db.SupportSQLiteDatabase;
-import android.arch.persistence.db.SupportSQLiteOpenHelper;
-import android.arch.persistence.room.Room;
 import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.nikita.popularmovies.common.database.MoviesContract;
-import com.nikita.popularmovies.common.database.PopularMoviesDatabase;
+import com.nikita.popularmovies.common.database.MoviesDbHelper;
 
 public final class MoviesContentProvider extends ContentProvider {
-  private SupportSQLiteOpenHelper dbHelper;
+  private MoviesDbHelper dbHelper;
   private static final UriMatcher matcher;
   private static final int MOVIES = 100;
 
@@ -27,9 +25,7 @@ public final class MoviesContentProvider extends ContentProvider {
 
   @Override
   public boolean onCreate() {
-    dbHelper = Room.databaseBuilder(getContext(), PopularMoviesDatabase.class, "database")
-      .build()
-      .getOpenHelper();
+    dbHelper = new MoviesDbHelper(getContext());
     return true;
   }
 
@@ -37,7 +33,7 @@ public final class MoviesContentProvider extends ContentProvider {
   @Override
   public Cursor query(@NonNull Uri uri, @Nullable String[] projection,
                       @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
-    SupportSQLiteDatabase db = dbHelper.getReadableDatabase();
+    SQLiteDatabase db = dbHelper.getReadableDatabase();
     int match = matcher.match(uri);
 
     Cursor retCursor;

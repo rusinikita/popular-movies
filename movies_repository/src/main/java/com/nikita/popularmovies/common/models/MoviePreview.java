@@ -1,28 +1,18 @@
 package com.nikita.popularmovies.common.models;
 
 
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-@Entity(tableName = "movie")
 public final class MoviePreview implements Poster, Parcelable {
-  @PrimaryKey
   public final String id;
   public final String title;
-  @ColumnInfo(name = "poster_path")
   public final String posterPath;
-  @ColumnInfo(name = "backdrop_path")
   public final String backdropPath;
   public final String overview;
-  @ColumnInfo(name = "release_date")
   public final String releaseDate;
   public final double popularity;
-  @ColumnInfo(name = "vote_count")
   public final int voteCount;
-  @ColumnInfo(name = "vote_average")
   public final double voteAverage;
 
   public MoviePreview(String id,
