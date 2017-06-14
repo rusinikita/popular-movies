@@ -18,6 +18,7 @@ import static com.nikita.popularmovies.common.database.MoviesContract.MovieEntit
 import static com.nikita.popularmovies.common.database.MoviesContract.MovieEntity.COLUMN_VOTE_AVERAGE;
 import static com.nikita.popularmovies.common.database.MoviesContract.MovieEntity.COLUMN_VOTE_COUNT;
 import static com.nikita.popularmovies.common.database.MoviesContract.MovieEntity.TABLE_NAME;
+import static com.nikita.popularmovies.common.database.MoviesContract.MovieEntity.contentVlues;
 
 public final class MoviesDbHelper extends SQLiteOpenHelper {
   public MoviesDbHelper(Context context) {
@@ -54,10 +55,35 @@ public final class MoviesDbHelper extends SQLiteOpenHelper {
   }
 
   public void saveMovie(MoviePreview movie) {
-    throw new UnsupportedOperationException();
+    SQLiteDatabase db = getWritableDatabase();
+    db.beginTransaction();
+    try {
+      db.insertWithOnConflict(
+        TABLE_NAME,
+        null,
+        contentVlues(movie),
+        SQLiteDatabase.CONFLICT_REPLACE);
+      db.setTransactionSuccessful();
+    } catch (Exception ignored) {
+
+    } finally {
+      db.endTransaction();
+    }
   }
 
   public void deleteMovie(MoviePreview movie) {
-    throw new UnsupportedOperationException();
+    SQLiteDatabase db = getWritableDatabase();
+    db.beginTransaction();
+    try {
+      db.delete(
+        TABLE_NAME,
+        COLUMN_ID + "=" + movie.id(),
+        null);
+      db.setTransactionSuccessful();
+    } catch (Exception ignored) {
+
+    } finally {
+      db.endTransaction();
+    }
   }
 }

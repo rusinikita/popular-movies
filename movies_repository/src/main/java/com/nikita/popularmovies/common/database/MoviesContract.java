@@ -1,5 +1,6 @@
 package com.nikita.popularmovies.common.database;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.BaseColumns;
@@ -64,6 +65,20 @@ public final class MoviesContract {
       }
 
       return list;
+    }
+
+    public static ContentValues contentVlues(MoviePreview movie) {
+      ContentValues cv = new ContentValues(9);
+      cv.put(COLUMN_ID, movie.id);
+      cv.put(COLUMN_TITLE, movie.title);
+      cv.put(COLUMN_POSTER_PATH, movie.posterPath);
+      cv.put(COLUMN_BACKDROP_PATH, movie.backdropPath);
+      cv.put(COLUMN_OVERVIEW, movie.overview);
+      cv.put(COLUMN_RELEASE_DATE, movie.releaseDate);
+      cv.put(COLUMN_POPULARITY, movie.popularity);
+      cv.put(COLUMN_VOTE_COUNT, movie.voteCount);
+      cv.put(COLUMN_VOTE_AVERAGE, movie.voteAverage);
+      return cv;
     }
   }
 }
