@@ -44,7 +44,10 @@ public class MovieDetailsActivity extends LifecycleActivity implements VideosAda
 
   @Override
   public void onVideoClick(Video video) {
-    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.youtube.com/watch?v=" + video.key)));
+    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.youtube.com/watch?v=" + video.key));
+    if (intent.resolveActivity(getPackageManager()) != null) {
+      startActivity(intent);
+    }
   }
 
   @Override
